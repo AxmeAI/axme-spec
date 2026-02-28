@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.webhooks.subscriptions.response.v1.json",
+  "title": "ApiWebhooksSubscriptionsResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "subscription"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "subscription": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subscription_id",
+        "owner_agent",
+        "callback_url",
+        "event_types",
+        "active",
+        "created_at",
+        "updated_at",
+        "revoked_at",
+        "secret_hint"
+      ],
+      "properties": {
+        "subscription_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "owner_agent": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "callback_url": {
+          "type": "string",
+          "format": "uri",
+          "minLength": 8,
+          "maxLength": 2048
+        },
+        "event_types": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 255
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "revoked_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "secret_hint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

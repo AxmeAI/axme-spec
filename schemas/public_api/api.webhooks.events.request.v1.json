@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.webhooks.events.request.v1.json",
+  "title": "ApiWebhooksEventsRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_type",
+    "source",
+    "payload"
+  ],
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "inbox.thread_created",
+        "inbox.thread_updated",
+        "inbox.reply_received",
+        "invite.accepted",
+        "auth.session_revoked"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 100
+    },
+    "payload": {
+      "type": "object"
+    }
+  }
+}

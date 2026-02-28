@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.webhooks.subscriptions.upsert.request.v1.json",
+  "title": "ApiWebhooksSubscriptionsUpsertRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "callback_url",
+    "event_types"
+  ],
+  "properties": {
+    "callback_url": {
+      "type": "string",
+      "format": "uri",
+      "minLength": 8,
+      "maxLength": 2048
+    },
+    "event_types": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "type": "string",
+        "enum": [
+          "inbox.thread_created",
+          "inbox.thread_updated",
+          "inbox.reply_received",
+          "invite.accepted",
+          "auth.session_revoked"
+        ]
+      }
+    },
+    "secret": {
+      "type": "string",
+      "minLength": 16,
+      "maxLength": 128
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 255
+    }
+  }
+}
