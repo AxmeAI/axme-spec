@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.approvals.decision.request.v1.json",
+  "title": "ApiApprovalsDecisionRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision"
+  ],
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": [
+        "approve",
+        "reject"
+      ]
+    },
+    "comment": {
+      "type": "string",
+      "maxLength": 1000
+    }
+  }
+}
