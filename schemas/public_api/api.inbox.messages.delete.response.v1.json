@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.inbox.messages.delete.response.v1.json",
+  "title": "ApiInboxMessagesDeleteResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "thread",
+    "mode",
+    "deleted_count",
+    "message_ids"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "thread": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "self",
+        "both"
+      ]
+    },
+    "deleted_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "message_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}
