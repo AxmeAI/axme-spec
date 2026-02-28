@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.inbox.delegate.request.v1.json",
+  "title": "ApiInboxDelegateRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "delegate_to": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "note": {
+      "type": "string",
+      "maxLength": 2000
+    }
+  }
+}

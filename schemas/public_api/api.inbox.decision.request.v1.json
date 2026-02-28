@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.inbox.decision.request.v1.json",
+  "title": "ApiInboxDecisionRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "comment": {
+      "type": "string",
+      "maxLength": 2000
+    }
+  }
+}
