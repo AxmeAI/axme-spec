@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/protocol/message.delivery.v1.json",
+  "title": "MessageDeliveryV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ack"
+  ],
+  "properties": {
+    "ack": {
+      "type": "string",
+      "enum": [
+        "accepted",
+        "delivered",
+        "read",
+        "processed",
+        "failed"
+      ]
+    },
+    "failure_reason": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "delivered_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "read_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "failed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
