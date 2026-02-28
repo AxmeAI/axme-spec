@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.intents.create.request.v1.json",
+  "title": "ApiIntentsCreateRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "intent_type",
+    "correlation_id",
+    "from_agent",
+    "to_agent",
+    "payload"
+  ],
+  "properties": {
+    "intent_type": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+(?:\\.[a-z0-9_]+)+\\.v[0-9]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "from_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "to_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "payload": {
+      "type": "object"
+    }
+  }
+}

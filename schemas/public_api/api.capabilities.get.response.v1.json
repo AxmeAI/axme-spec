@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.capabilities.get.response.v1.json",
+  "title": "ApiCapabilitiesGetResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "capabilities",
+    "supported_intent_types"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 120
+      },
+      "minItems": 1
+    },
+    "supported_intent_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^intent\\.[a-z0-9_]+\\.v1$"
+      },
+      "minItems": 1
+    }
+  }
+}

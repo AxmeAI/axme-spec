@@ -4,9 +4,9 @@ AXP protocol specifications, schemas, and compatibility notes.
 
 ## Status
 
-Wave 2 extraction in progress.
+Wave 3 extraction in progress.
 
-## Included through Wave 2
+## Included through Wave 3
 
 - Protocol schemas:
   - `schemas/protocol/intent.ask.v1.json`
@@ -22,6 +22,13 @@ Wave 2 extraction in progress.
   - `docs/schema-versioning-rules.md`
   - `docs/protocol-error-status-model.md`
   - `docs/idempotency-correlation-rules.md`
+- Public API schemas (core set):
+  - `schemas/public_api/api.intents.create.request.v1.json`
+  - `schemas/public_api/api.intents.create.response.v1.json`
+  - `schemas/public_api/api.intents.get.response.v1.json`
+  - `schemas/public_api/api.approvals.decision.request.v1.json`
+  - `schemas/public_api/api.approvals.decision.response.v1.json`
+  - `schemas/public_api/api.capabilities.get.response.v1.json`
 - Schema validation script, tests, and CI gate
 
 ## Development
