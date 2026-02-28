@@ -1,0 +1,149 @@
+# Public API Schema Index (Step 4)
+
+## Scope
+
+Schemas for external client contracts in `services/gateway` API.
+
+Related artifacts:
+
+- OpenAPI export: `docs/openapi/gateway.v1.json`
+- Auth/idempotency/rate-limit docs: `docs/public-api-auth.md`
+
+## Files
+
+- `schemas/public_api/api.intents.create.request.v1.json`
+- `schemas/public_api/api.intents.create.response.v1.json`
+- `schemas/public_api/api.intents.get.response.v1.json`
+- `schemas/public_api/api.approvals.decision.request.v1.json`
+- `schemas/public_api/api.approvals.decision.response.v1.json`
+- `schemas/public_api/api.webhooks.events.request.v1.json`
+- `schemas/public_api/api.webhooks.events.response.v1.json`
+- `schemas/public_api/api.webhooks.events.replay.response.v1.json`
+- `schemas/public_api/api.webhooks.subscriptions.upsert.request.v1.json`
+- `schemas/public_api/api.webhooks.subscriptions.response.v1.json`
+- `schemas/public_api/api.webhooks.subscriptions.list.response.v1.json`
+- `schemas/public_api/api.webhooks.subscriptions.delete.response.v1.json`
+- `schemas/public_api/api.capabilities.get.response.v1.json`
+- `schemas/public_api/api.schemas.upsert.request.v1.json`
+- `schemas/public_api/api.schemas.upsert.response.v1.json`
+- `schemas/public_api/api.schemas.get.response.v1.json`
+- `schemas/public_api/api.inbox.list.response.v1.json`
+- `schemas/public_api/api.inbox.changes.response.v1.json`
+- `schemas/public_api/api.inbox.thread.response.v1.json`
+- `schemas/public_api/api.inbox.reply.request.v1.json`
+- `schemas/public_api/api.inbox.messages.delete.request.v1.json`
+- `schemas/public_api/api.inbox.messages.delete.response.v1.json`
+- `schemas/public_api/api.inbox.delegate.request.v1.json`
+- `schemas/public_api/api.inbox.decision.request.v1.json`
+- `schemas/public_api/api.users.register_nick.request.v1.json`
+- `schemas/public_api/api.users.register_nick.response.v1.json`
+- `schemas/public_api/api.users.check_nick.response.v1.json`
+- `schemas/public_api/api.users.rename_nick.request.v1.json`
+- `schemas/public_api/api.users.rename_nick.response.v1.json`
+- `schemas/public_api/api.users.profile.get.response.v1.json`
+- `schemas/public_api/api.users.profile.update.request.v1.json`
+- `schemas/public_api/api.users.profile.update.response.v1.json`
+- `schemas/public_api/api.invites.create.request.v1.json`
+- `schemas/public_api/api.invites.create.response.v1.json`
+- `schemas/public_api/api.invites.get.response.v1.json`
+- `schemas/public_api/api.invites.accept.request.v1.json`
+- `schemas/public_api/api.invites.accept.response.v1.json`
+- `schemas/public_api/api.media.create_upload.request.v1.json`
+- `schemas/public_api/api.media.create_upload.response.v1.json`
+- `schemas/public_api/api.media.finalize_upload.request.v1.json`
+- `schemas/public_api/api.media.finalize_upload.response.v1.json`
+- `schemas/public_api/api.media.get.response.v1.json`
+
+## Endpoint Mapping
+
+- `POST /v1/intents`
+  - request: `api.intents.create.request.v1.json`
+  - response: `api.intents.create.response.v1.json`
+- `GET /v1/intents/{intent_id}`
+  - response: `api.intents.get.response.v1.json`
+- `POST /v1/approvals/{approval_id}/decision`
+  - request: `api.approvals.decision.request.v1.json`
+  - response: `api.approvals.decision.response.v1.json`
+- `POST /v1/webhooks/events`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - request: `api.webhooks.events.request.v1.json`
+  - response: `api.webhooks.events.response.v1.json`
+- `POST /v1/webhooks/events/{event_id}/replay`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - response: `api.webhooks.events.replay.response.v1.json`
+- `POST /v1/webhooks/subscriptions`
+  - request: `api.webhooks.subscriptions.upsert.request.v1.json`
+  - response: `api.webhooks.subscriptions.response.v1.json`
+- `GET /v1/webhooks/subscriptions`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - response: `api.webhooks.subscriptions.list.response.v1.json`
+- `DELETE /v1/webhooks/subscriptions/{subscription_id}`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - response: `api.webhooks.subscriptions.delete.response.v1.json`
+- `GET /v1/capabilities`
+  - response: `api.capabilities.get.response.v1.json`
+- `POST /v1/schemas`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - request: `api.schemas.upsert.request.v1.json`
+  - response: `api.schemas.upsert.response.v1.json`
+- `GET /v1/schemas/{semantic_type}`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - response: `api.schemas.get.response.v1.json`
+- `GET /v1/inbox`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - response: `api.inbox.list.response.v1.json`
+- `GET /v1/inbox/changes`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - response: `api.inbox.changes.response.v1.json`
+- `GET /v1/inbox/{thread_id}`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - response: `api.inbox.thread.response.v1.json`
+- `POST /v1/inbox/{thread_id}/reply`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - request: `api.inbox.reply.request.v1.json`
+  - response: `api.inbox.thread.response.v1.json`
+- `POST /v1/inbox/{thread_id}/messages/delete`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - request: `api.inbox.messages.delete.request.v1.json`
+  - response: `api.inbox.messages.delete.response.v1.json`
+- `POST /v1/inbox/{thread_id}/delegate`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - request: `api.inbox.delegate.request.v1.json`
+  - response: `api.inbox.thread.response.v1.json`
+- `POST /v1/inbox/{thread_id}/approve`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - request: `api.inbox.decision.request.v1.json`
+  - response: `api.inbox.thread.response.v1.json`
+- `POST /v1/inbox/{thread_id}/reject`
+  - owner scoping: `x-owner-agent` header or `owner_agent` query
+  - request: `api.inbox.decision.request.v1.json`
+  - response: `api.inbox.thread.response.v1.json`
+- `POST /v1/users/register-nick`
+  - request: `api.users.register_nick.request.v1.json`
+  - response: `api.users.register_nick.response.v1.json`
+- `GET /v1/users/check-nick?nick=...`
+  - response: `api.users.check_nick.response.v1.json`
+- `POST /v1/users/rename-nick`
+  - request: `api.users.rename_nick.request.v1.json`
+  - response: `api.users.rename_nick.response.v1.json`
+- `GET /v1/users/profile?owner_agent=...`
+  - response: `api.users.profile.get.response.v1.json`
+- `POST /v1/users/profile/update`
+  - request: `api.users.profile.update.request.v1.json`
+  - response: `api.users.profile.update.response.v1.json`
+- `POST /v1/invites/create`
+  - request: `api.invites.create.request.v1.json`
+  - response: `api.invites.create.response.v1.json`
+- `GET /v1/invites/{token}`
+  - response: `api.invites.get.response.v1.json`
+- `POST /v1/invites/{token}/accept`
+  - request: `api.invites.accept.request.v1.json`
+  - response: `api.invites.accept.response.v1.json`
+- `POST /v1/media/create-upload`
+  - request: `api.media.create_upload.request.v1.json`
+  - response: `api.media.create_upload.response.v1.json`
+- `POST /v1/media/finalize-upload`
+  - request: `api.media.finalize_upload.request.v1.json`
+  - response: `api.media.finalize_upload.response.v1.json`
+- `GET /v1/media/{upload_id}`
+  - response: `api.media.get.response.v1.json`

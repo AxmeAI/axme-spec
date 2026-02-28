@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/protocol/intent.reply.v1.json",
+  "title": "IntentReplyV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "answer",
+    "status",
+    "responded_by",
+    "responded_at"
+  ],
+  "properties": {
+    "answer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "answered",
+        "needs_clarification",
+        "declined",
+        "timeout"
+      ]
+    },
+    "clarification_question": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "responded_by": {
+      "type": "string",
+      "minLength": 3
+    },
+    "responded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "workflow": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "needs_clarification"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "clarification_question"
+        ]
+      }
+    }
+  ]
+}
