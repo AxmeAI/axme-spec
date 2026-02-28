@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/protocol/message.envelope.v3.json",
+  "title": "MessageEnvelopeV3Encrypted",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "message_id",
+    "from",
+    "to",
+    "content_kind",
+    "ciphertext",
+    "encryption",
+    "trace"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "v3"
+    },
+    "message_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "thread_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "from": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "to": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 255
+      }
+    },
+    "content_kind": {
+      "type": "string",
+      "enum": [
+        "text",
+        "intent",
+        "media",
+        "system"
+      ]
+    },
+    "ciphertext": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "type",
+        "body"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "m.room.encrypted"
+          ]
+        },
+        "body": {
+          "type": "object"
+        }
+      }
+    },
+    "encryption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "m.megolm.v1.aes-sha2",
+            "m.olm.v1.curve25519-aes-sha2"
+          ]
+        },
+        "sender_key": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 512
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "device_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    },
+    "attachments": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "upload_id"
+        ],
+        "properties": {
+          "upload_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mime_type": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
+      }
+    },
+    "transport": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "matrix_room_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "matrix_event_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "correlation_id"
+      ],
+      "properties": {
+        "correlation_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "causation_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "boolean",
+          "null"
+        ]
+      }
+    }
+  }
+}

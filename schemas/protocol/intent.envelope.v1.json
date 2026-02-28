@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/protocol/intent.envelope.v1.json",
+  "title": "IntentEnvelopeV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "intent_type",
+    "intent_id",
+    "correlation_id",
+    "created_at",
+    "from_agent",
+    "to_agent",
+    "payload"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "v1"
+    },
+    "intent_type": {
+      "type": "string",
+      "pattern": "^intent\\.[a-z0-9_]+\\.v1$"
+    },
+    "intent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "from_agent": {
+      "type": "string",
+      "minLength": 3
+    },
+    "to_agent": {
+      "type": "string",
+      "minLength": 3
+    },
+    "payload": {
+      "type": "object"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

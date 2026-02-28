@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/protocol/intent.error.v1.json",
+  "title": "IntentErrorV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "code",
+    "message",
+    "category",
+    "retryable",
+    "at"
+  ],
+  "properties": {
+    "code": {
+      "type": "string",
+      "pattern": "^[a-z0-9_:.\\-]{3,128}$"
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "validation",
+        "auth",
+        "policy",
+        "transport",
+        "timeout",
+        "internal"
+      ]
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}
