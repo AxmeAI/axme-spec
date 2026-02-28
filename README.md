@@ -4,9 +4,9 @@ AXP protocol specifications, schemas, and compatibility notes.
 
 ## Status
 
-Wave 4 extraction in progress.
+Track B extraction in progress.
 
-## Included through Wave 4
+## Included in current extraction scope
 
 - Protocol schemas:
   - `schemas/protocol/intent.ask.v1.json`
@@ -38,6 +38,14 @@ Wave 4 extraction in progress.
   - `schemas/public_api/api.inbox.messages.delete.response.v1.json`
   - `schemas/public_api/api.inbox.delegate.request.v1.json`
   - `schemas/public_api/api.inbox.decision.request.v1.json`
+- Public API schemas (webhooks set):
+  - `schemas/public_api/api.webhooks.events.request.v1.json`
+  - `schemas/public_api/api.webhooks.events.response.v1.json`
+  - `schemas/public_api/api.webhooks.events.replay.response.v1.json`
+  - `schemas/public_api/api.webhooks.subscriptions.upsert.request.v1.json`
+  - `schemas/public_api/api.webhooks.subscriptions.response.v1.json`
+  - `schemas/public_api/api.webhooks.subscriptions.list.response.v1.json`
+  - `schemas/public_api/api.webhooks.subscriptions.delete.response.v1.json`
 - Schema validation script, tests, and CI gate
 
 ## Development

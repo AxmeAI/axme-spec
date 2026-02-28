@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.webhooks.subscriptions.delete.response.v1.json",
+  "title": "ApiWebhooksSubscriptionsDeleteResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "subscription_id",
+    "revoked_at"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "subscription_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "revoked_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

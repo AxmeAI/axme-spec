@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.webhooks.events.replay.response.v1.json",
+  "title": "ApiWebhooksEventsReplayResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "event_id",
+    "owner_agent",
+    "event_type",
+    "queued_deliveries",
+    "processed_deliveries",
+    "delivered",
+    "pending",
+    "dead_lettered",
+    "replayed_at"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "event_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "owner_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "inbox.thread_created",
+        "inbox.thread_updated",
+        "inbox.reply_received",
+        "invite.accepted",
+        "auth.session_revoked"
+      ]
+    },
+    "queued_deliveries": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "processed_deliveries": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "delivered": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "pending": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "dead_lettered": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "replayed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
