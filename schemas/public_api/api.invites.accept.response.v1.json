@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.invites.accept.response.v1.json",
+  "title": "ApiInvitesAcceptResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "token",
+    "status",
+    "invite_owner_agent",
+    "user_id",
+    "owner_agent",
+    "nick",
+    "public_address",
+    "accepted_at",
+    "registry_bind_status"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "token": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 64
+    },
+    "status": {
+      "type": "string",
+      "const": "accepted"
+    },
+    "invite_owner_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "user_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "owner_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "nick": {
+      "type": "string",
+      "pattern": "^@[\\w.-]{3,32}$"
+    },
+    "public_address": {
+      "type": "string",
+      "pattern": "^[\\w.-]{3,32}@[a-z0-9-]{2,32}$"
+    },
+    "display_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "registry_bind_status": {
+      "type": "string",
+      "enum": [
+        "propagated",
+        "failed",
+        "disabled",
+        "skipped_no_hint"
+      ]
+    }
+  }
+}

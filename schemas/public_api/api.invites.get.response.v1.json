@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.invites.get.response.v1.json",
+  "title": "ApiInvitesGetResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "token",
+    "owner_agent",
+    "status",
+    "created_at",
+    "expires_at"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "token": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 64
+    },
+    "owner_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "recipient_hint": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "expired"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "accepted_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "accepted_owner_agent": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "nick": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^@[\\w.-]{3,32}$"
+    },
+    "public_address": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[\\w.-]{3,32}@[a-z0-9-]{2,32}$"
+    }
+  }
+}

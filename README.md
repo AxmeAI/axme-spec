@@ -55,6 +55,22 @@ Track B extraction in progress.
   - `schemas/public_api/api.users.profile.get.response.v1.json`
   - `schemas/public_api/api.users.profile.update.request.v1.json`
   - `schemas/public_api/api.users.profile.update.response.v1.json`
+- Public API schemas (invites set):
+  - `schemas/public_api/api.invites.create.request.v1.json`
+  - `schemas/public_api/api.invites.create.response.v1.json`
+  - `schemas/public_api/api.invites.get.response.v1.json`
+  - `schemas/public_api/api.invites.accept.request.v1.json`
+  - `schemas/public_api/api.invites.accept.response.v1.json`
+- Public API schemas (media set):
+  - `schemas/public_api/api.media.create_upload.request.v1.json`
+  - `schemas/public_api/api.media.create_upload.response.v1.json`
+  - `schemas/public_api/api.media.finalize_upload.request.v1.json`
+  - `schemas/public_api/api.media.finalize_upload.response.v1.json`
+  - `schemas/public_api/api.media.get.response.v1.json`
+- Public API schemas (schemas set):
+  - `schemas/public_api/api.schemas.upsert.request.v1.json`
+  - `schemas/public_api/api.schemas.upsert.response.v1.json`
+  - `schemas/public_api/api.schemas.get.response.v1.json`
 - Schema validation script, tests, and CI gate
 
 ## Development

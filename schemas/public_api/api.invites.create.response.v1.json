@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.invites.create.response.v1.json",
+  "title": "ApiInvitesCreateResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "token",
+    "invite_url",
+    "owner_agent",
+    "status",
+    "created_at",
+    "expires_at"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "token": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 64
+    },
+    "invite_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "owner_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "recipient_hint": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "expired"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

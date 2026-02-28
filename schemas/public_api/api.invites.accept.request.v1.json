@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.invites.accept.request.v1.json",
+  "title": "ApiInvitesAcceptRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "nick"
+  ],
+  "properties": {
+    "nick": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    }
+  }
+}
