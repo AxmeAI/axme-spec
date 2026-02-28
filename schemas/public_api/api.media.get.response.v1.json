@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.media.get.response.v1.json",
+  "title": "ApiMediaGetResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "upload"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "upload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "upload_id",
+        "owner_agent",
+        "bucket",
+        "object_path",
+        "mime_type",
+        "filename",
+        "size_bytes",
+        "sha256",
+        "status",
+        "created_at",
+        "expires_at",
+        "finalized_at",
+        "download_url",
+        "preview_url"
+      ],
+      "properties": {
+        "upload_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "owner_agent": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "bucket": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "object_path": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1024
+        },
+        "mime_type": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "filename": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483648
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "ready",
+            "expired"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "finalized_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "download_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "preview_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        }
+      }
+    }
+  }
+}

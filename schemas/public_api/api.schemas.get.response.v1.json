@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.schemas.get.response.v1.json",
+  "title": "ApiSchemasGetResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "schema"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_type",
+        "schema_ref",
+        "schema_hash",
+        "compatibility_mode",
+        "scope",
+        "owner_agent",
+        "active",
+        "schema_json",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "semantic_type": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+(?:\\.[a-z0-9_]+){2,}\\.v[0-9]+$"
+        },
+        "schema_ref": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "schema_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "compatibility_mode": {
+          "type": "string",
+          "enum": [
+            "strict",
+            "backward",
+            "warn"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "tenant",
+            "core"
+          ]
+        },
+        "owner_agent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "schema_json": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

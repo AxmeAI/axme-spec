@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.schemas.upsert.request.v1.json",
+  "title": "ApiSchemasUpsertRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "semantic_type",
+    "schema_json",
+    "compatibility_mode"
+  ],
+  "properties": {
+    "semantic_type": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+(?:\\.[a-z0-9_]+){2,}\\.v[0-9]+$"
+    },
+    "schema_json": {
+      "type": "object"
+    },
+    "schema_ref": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "compatibility_mode": {
+      "type": "string",
+      "enum": [
+        "strict",
+        "backward",
+        "warn"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "tenant",
+        "core"
+      ]
+    },
+    "active": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.media.create_upload.response.v1.json",
+  "title": "ApiMediaCreateUploadResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "upload_id",
+    "owner_agent",
+    "bucket",
+    "object_path",
+    "upload_url",
+    "status",
+    "expires_at",
+    "max_size_bytes"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "upload_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "owner_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "bucket": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "object_path": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 1024
+    },
+    "upload_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending"
+      ]
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "max_size_bytes": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

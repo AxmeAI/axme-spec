@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.media.finalize_upload.response.v1.json",
+  "title": "ApiMediaFinalizeUploadResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "upload_id",
+    "owner_agent",
+    "bucket",
+    "object_path",
+    "mime_type",
+    "size_bytes",
+    "status",
+    "finalized_at"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "upload_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "owner_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "bucket": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "object_path": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 1024
+    },
+    "mime_type": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "size_bytes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2147483648
+    },
+    "sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ready"
+      ]
+    },
+    "finalized_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
