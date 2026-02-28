@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.users.rename_nick.response.v1.json",
+  "title": "ApiUsersRenameNickResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "user_id",
+    "owner_agent",
+    "nick",
+    "public_address",
+    "renamed_at"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "user_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "owner_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "nick": {
+      "type": "string",
+      "pattern": "^@[\\w.-]{3,32}$"
+    },
+    "public_address": {
+      "type": "string",
+      "pattern": "^[\\w.-]{3,32}@ax$"
+    },
+    "display_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "phone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 3,
+      "maxLength": 32
+    },
+    "email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "renamed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

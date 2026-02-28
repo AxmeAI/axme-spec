@@ -46,6 +46,15 @@ Track B extraction in progress.
   - `schemas/public_api/api.webhooks.subscriptions.response.v1.json`
   - `schemas/public_api/api.webhooks.subscriptions.list.response.v1.json`
   - `schemas/public_api/api.webhooks.subscriptions.delete.response.v1.json`
+- Public API schemas (users/profile set):
+  - `schemas/public_api/api.users.register_nick.request.v1.json`
+  - `schemas/public_api/api.users.register_nick.response.v1.json`
+  - `schemas/public_api/api.users.check_nick.response.v1.json`
+  - `schemas/public_api/api.users.rename_nick.request.v1.json`
+  - `schemas/public_api/api.users.rename_nick.response.v1.json`
+  - `schemas/public_api/api.users.profile.get.response.v1.json`
+  - `schemas/public_api/api.users.profile.update.request.v1.json`
+  - `schemas/public_api/api.users.profile.update.response.v1.json`
 - Schema validation script, tests, and CI gate
 
 ## Development

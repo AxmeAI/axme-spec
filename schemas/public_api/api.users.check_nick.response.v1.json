@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.users.check_nick.response.v1.json",
+  "title": "ApiUsersCheckNickResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "nick",
+    "normalized_nick",
+    "public_address",
+    "available"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "nick": {
+      "type": "string",
+      "pattern": "^@[\\w.-]{3,32}$"
+    },
+    "normalized_nick": {
+      "type": "string",
+      "pattern": "^[\\w.-]{3,32}$"
+    },
+    "public_address": {
+      "type": "string",
+      "pattern": "^[\\w.-]{3,32}@ax$"
+    },
+    "available": {
+      "type": "boolean"
+    }
+  }
+}
