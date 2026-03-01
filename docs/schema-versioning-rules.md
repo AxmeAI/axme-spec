@@ -48,6 +48,8 @@ Rules apply to:
 - `api.intents.create.response.v1.json`
 - `api.intents.get.response.v1.json`
 - `api.intents.events.list.response.v1.json`
+- `api.intents.resolve.request.v1.json`
+- `api.intents.resolve.response.v1.json`
 - `api.approvals.decision.request.v1.json`
 - `api.approvals.decision.response.v1.json`
 - `api.webhooks.events.request.v1.json`
