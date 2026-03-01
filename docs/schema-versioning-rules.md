@@ -39,12 +39,15 @@ Rules apply to:
 - `intent.reply.v1.json`
 - `intent.status.v1.json`
 - `intent.error.v1.json`
+- `intent.lifecycle.v1.json`
+- `intent.event.v1.json`
 
 ## Required Public API Schemas (v1 line)
 
 - `api.intents.create.request.v1.json`
 - `api.intents.create.response.v1.json`
 - `api.intents.get.response.v1.json`
+- `api.intents.events.list.response.v1.json`
 - `api.approvals.decision.request.v1.json`
 - `api.approvals.decision.response.v1.json`
 - `api.webhooks.events.request.v1.json`

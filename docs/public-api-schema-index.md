@@ -4,6 +4,12 @@
 
 Schemas for external client contracts in `services/gateway` API.
 
+Intent lifecycle baseline (durable execution semantics) is defined in:
+
+- `docs/intent-lifecycle-v1.md`
+- `schemas/protocol/intent.lifecycle.v1.json`
+- `schemas/protocol/intent.event.v1.json`
+
 Related artifacts:
 
 - OpenAPI export: `docs/openapi/gateway.v1.json`
@@ -14,6 +20,7 @@ Related artifacts:
 - `schemas/public_api/api.intents.create.request.v1.json`
 - `schemas/public_api/api.intents.create.response.v1.json`
 - `schemas/public_api/api.intents.get.response.v1.json`
+- `schemas/public_api/api.intents.events.list.response.v1.json`
 - `schemas/public_api/api.approvals.decision.request.v1.json`
 - `schemas/public_api/api.approvals.decision.response.v1.json`
 - `schemas/public_api/api.webhooks.events.request.v1.json`
@@ -61,6 +68,8 @@ Related artifacts:
   - response: `api.intents.create.response.v1.json`
 - `GET /v1/intents/{intent_id}`
   - response: `api.intents.get.response.v1.json`
+- `GET /v1/intents/{intent_id}/events`
+  - response: `api.intents.events.list.response.v1.json`
 - `POST /v1/approvals/{approval_id}/decision`
   - request: `api.approvals.decision.request.v1.json`
   - response: `api.approvals.decision.response.v1.json`

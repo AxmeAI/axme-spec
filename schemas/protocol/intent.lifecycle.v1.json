@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/protocol/intent.lifecycle.v1.json",
+  "title": "IntentLifecycleV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "intent_id",
+    "correlation_id",
+    "status",
+    "seq",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "intent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "SUBMITTED",
+        "DELIVERED",
+        "ACKNOWLEDGED",
+        "IN_PROGRESS",
+        "WAITING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELED"
+      ]
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "handler": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "waiting_reason": {
+      "type": "string",
+      "enum": [
+        "WAITING_FOR_HUMAN",
+        "WAITING_FOR_TOOL",
+        "WAITING_FOR_AGENT",
+        "WAITING_FOR_TIME"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "timeout_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "handler_version": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "WAITING"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "waiting_reason"
+        ]
+      }
+    }
+  ]
+}

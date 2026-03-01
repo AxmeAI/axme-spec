@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/protocol/intent.event.v1.json",
+  "title": "IntentEventV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "intent_id",
+    "seq",
+    "event_type",
+    "status",
+    "at"
+  ],
+  "properties": {
+    "intent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "intent.created",
+        "intent.submitted",
+        "intent.delivered",
+        "intent.acknowledged",
+        "intent.in_progress",
+        "intent.waiting",
+        "intent.completed",
+        "intent.failed",
+        "intent.canceled",
+        "intent.transfer",
+        "intent.timeout"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "SUBMITTED",
+        "DELIVERED",
+        "ACKNOWLEDGED",
+        "IN_PROGRESS",
+        "WAITING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELED"
+      ]
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "handler": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "waiting_reason": {
+      "type": "string",
+      "enum": [
+        "WAITING_FOR_HUMAN",
+        "WAITING_FOR_TOOL",
+        "WAITING_FOR_AGENT",
+        "WAITING_FOR_TIME"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "WAITING"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "waiting_reason"
+        ]
+      }
+    }
+  ]
+}
