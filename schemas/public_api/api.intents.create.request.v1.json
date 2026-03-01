@@ -30,6 +30,11 @@
       "minLength": 3,
       "maxLength": 255
     },
+    "reply_to": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
     "payload": {
       "type": "object"
     }

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.intents.events.list.response.v1.json",
+  "title": "ApiIntentsEventsListResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "events"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "intent_id",
+          "seq",
+          "event_type",
+          "status",
+          "at"
+        ],
+        "properties": {
+          "intent_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "seq": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "event_type": {
+            "type": "string",
+            "pattern": "^intent\\.[a-z_]+$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "SUBMITTED",
+              "DELIVERED",
+              "ACKNOWLEDGED",
+              "IN_PROGRESS",
+              "WAITING",
+              "COMPLETED",
+              "FAILED",
+              "CANCELED"
+            ]
+          },
+          "waiting_reason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "WAITING_FOR_HUMAN",
+              "WAITING_FOR_TOOL",
+              "WAITING_FOR_AGENT",
+              "WAITING_FOR_TIME",
+              null
+            ]
+          },
+          "handler": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 3,
+            "maxLength": 255
+          },
+          "actor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "details": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,10 @@
 
 AXP protocol specifications, schemas, and compatibility notes.
 
+Canonical concept:
+
+- **AXP is the Intent Protocol (durable execution layer).**
+
 ## Status
 
 Track B extraction in progress.

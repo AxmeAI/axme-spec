@@ -55,6 +55,11 @@
         "to_agent": {
           "type": "string"
         },
+        "reply_to": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
         "payload": {
           "type": "object"
         }
