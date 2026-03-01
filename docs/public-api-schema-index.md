@@ -21,6 +21,8 @@ Related artifacts:
 - `schemas/public_api/api.intents.create.response.v1.json`
 - `schemas/public_api/api.intents.get.response.v1.json`
 - `schemas/public_api/api.intents.events.list.response.v1.json`
+- `schemas/public_api/api.intents.resolve.request.v1.json`
+- `schemas/public_api/api.intents.resolve.response.v1.json`
 - `schemas/public_api/api.approvals.decision.request.v1.json`
 - `schemas/public_api/api.approvals.decision.response.v1.json`
 - `schemas/public_api/api.webhooks.events.request.v1.json`
@@ -70,6 +72,12 @@ Related artifacts:
   - response: `api.intents.get.response.v1.json`
 - `GET /v1/intents/{intent_id}/events`
   - response: `api.intents.events.list.response.v1.json`
+- `POST /v1/intents/{intent_id}/resolve`
+  - request: `api.intents.resolve.request.v1.json`
+  - response: `api.intents.resolve.response.v1.json`
+- `GET /v1/intents/{intent_id}/events/stream`
+  - transport: `text/event-stream` (SSE)
+  - event payload shape: same event object as `api.intents.events.list.response.v1.json` item
 - `POST /v1/approvals/{approval_id}/decision`
   - request: `api.approvals.decision.request.v1.json`
   - response: `api.approvals.decision.response.v1.json`

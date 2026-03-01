@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.intents.resolve.request.v1.json",
+  "title": "ApiIntentsResolveRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "FAILED",
+        "CANCELED"
+      ]
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "result": {
+      "type": "object"
+    },
+    "error": {
+      "type": "object"
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 2000
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "COMPLETED"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "result"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "FAILED"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "error"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "CANCELED"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "reason"
+        ]
+      }
+    }
+  ]
+}
