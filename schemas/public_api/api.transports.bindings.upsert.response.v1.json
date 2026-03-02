@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.transports.bindings.upsert.response.v1.json",
+  "title": "ApiTransportsBindingsUpsertResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "binding"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "binding": {
+      "$ref": "#/$defs/binding"
+    }
+  },
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "binding_id",
+        "principal_id",
+        "org_id",
+        "workspace_id",
+        "transport_type",
+        "transport_handle",
+        "priority",
+        "status",
+        "metadata",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "binding_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "principal_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "org_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "workspace_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "transport_type": {
+          "type": "string",
+          "enum": [
+            "matrix",
+            "http",
+            "queue",
+            "webhook"
+          ]
+        },
+        "transport_handle": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 255
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive"
+          ]
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

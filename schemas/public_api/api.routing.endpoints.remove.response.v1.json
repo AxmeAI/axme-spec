@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.routing.endpoints.remove.response.v1.json",
+  "title": "ApiRoutingEndpointsRemoveResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "route"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route_id",
+        "removed"
+      ],
+      "properties": {
+        "route_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "removed": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    }
+  }
+}

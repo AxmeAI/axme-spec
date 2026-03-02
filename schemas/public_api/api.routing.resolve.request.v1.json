@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.routing.resolve.request.v1.json",
+  "title": "ApiRoutingResolveRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "org_id",
+    "workspace_id"
+  ],
+  "properties": {
+    "org_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "workspace_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "alias": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "principal_id": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 64
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "alias"
+      ]
+    },
+    {
+      "required": [
+        "principal_id"
+      ]
+    }
+  ]
+}
