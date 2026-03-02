@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.billing.invoices.list.response.v1.json",
+  "title": "ApiBillingInvoicesListResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "invoices"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "invoices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/invoice"
+      }
+    }
+  },
+  "$defs": {
+    "invoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invoice_id",
+        "org_id",
+        "workspace_id",
+        "billing_plan_id",
+        "period_start",
+        "period_end",
+        "subtotal_minor",
+        "total_minor",
+        "currency",
+        "status",
+        "due_at",
+        "issued_at",
+        "paid_at",
+        "metadata",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "invoice_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "org_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "workspace_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "billing_plan_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 3
+        },
+        "period_start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "period_end": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "subtotal_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "currency": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 16
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "issued",
+            "paid",
+            "overdue",
+            "void"
+          ]
+        },
+        "due_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "issued_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "paid_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

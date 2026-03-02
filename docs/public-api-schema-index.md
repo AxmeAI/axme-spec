@@ -285,6 +285,28 @@ Related artifacts:
 - `POST /v1/service-accounts/{service_account_id}/keys/{key_id}/revoke`
   - response: `api.service_accounts.keys.revoke.response.v1.json`
 
+## Track F Phase 2 Billing Families (Draft Contracts)
+
+### Files
+
+- `schemas/public_api/api.billing.plan.update.request.v1.json`
+- `schemas/public_api/api.billing.plan.update.response.v1.json`
+- `schemas/public_api/api.billing.plan.get.response.v1.json`
+- `schemas/public_api/api.billing.invoices.list.response.v1.json`
+- `schemas/public_api/api.billing.invoices.get.response.v1.json`
+
+### Planned Endpoint Mapping
+
+- `PATCH /v1/billing/plan`
+  - request: `api.billing.plan.update.request.v1.json`
+  - response: `api.billing.plan.update.response.v1.json`
+- `GET /v1/billing/plan?org_id=...&workspace_id=...`
+  - response: `api.billing.plan.get.response.v1.json`
+- `GET /v1/billing/invoices?org_id=...&workspace_id=...`
+  - response: `api.billing.invoices.list.response.v1.json`
+- `GET /v1/billing/invoices/{invoice_id}`
+  - response: `api.billing.invoices.get.response.v1.json`
+
 ## Track F Phase 3 Naming, Routing, Transports, Deliveries Families (Draft Contracts)
 
 ### Files
