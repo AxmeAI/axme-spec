@@ -10,6 +10,11 @@ Intent lifecycle baseline (durable execution semantics) is defined in:
 - `schemas/protocol/intent.lifecycle.v1.json`
 - `schemas/protocol/intent.event.v1.json`
 
+Public API status projection rule:
+
+- `intent.status` is canonical lifecycle status (`CREATED` -> terminal).
+- `intent.legacy_status` is optional compatibility projection for legacy clients.
+
 Related artifacts:
 
 - OpenAPI export: `docs/openapi/gateway.v1.json`

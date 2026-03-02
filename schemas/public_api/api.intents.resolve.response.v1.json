@@ -34,7 +34,19 @@
           "format": "uuid"
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "COMPLETED",
+            "FAILED",
+            "CANCELED"
+          ]
+        },
+        "legacy_status": {
+          "type": "string",
+          "enum": [
+            "done",
+            "failed"
+          ]
         },
         "created_at": {
           "type": "string",
