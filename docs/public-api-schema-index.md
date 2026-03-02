@@ -230,3 +230,25 @@ Related artifacts:
 - `POST /v1/access-requests/{access_request_id}/review`
   - request: `api.access_requests.review.request.v1.json`
   - response: `api.access_requests.review.response.v1.json`
+
+## Track F Phase 1 Quota and Usage Families (Draft Contracts)
+
+### Files
+
+- `schemas/public_api/api.quotas.get.response.v1.json`
+- `schemas/public_api/api.quotas.update.request.v1.json`
+- `schemas/public_api/api.quotas.update.response.v1.json`
+- `schemas/public_api/api.usage.summary.get.response.v1.json`
+- `schemas/public_api/api.usage.timeseries.get.response.v1.json`
+
+### Planned Endpoint Mapping
+
+- `GET /v1/quotas?org_id=...&workspace_id=...`
+  - response: `api.quotas.get.response.v1.json`
+- `PATCH /v1/quotas`
+  - request: `api.quotas.update.request.v1.json`
+  - response: `api.quotas.update.response.v1.json`
+- `GET /v1/usage/summary?org_id=...&workspace_id=...`
+  - response: `api.usage.summary.get.response.v1.json`
+- `GET /v1/usage/timeseries?org_id=...&workspace_id=...`
+  - response: `api.usage.timeseries.get.response.v1.json`
