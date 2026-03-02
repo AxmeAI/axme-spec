@@ -257,3 +257,30 @@ Related artifacts:
   - response: `api.usage.summary.get.response.v1.json`
 - `GET /v1/usage/timeseries?org_id=...&workspace_id=...`
   - response: `api.usage.timeseries.get.response.v1.json`
+
+## Track F Phase 2 Service Accounts Families (Draft Contracts)
+
+### Files
+
+- `schemas/public_api/api.service_accounts.create.request.v1.json`
+- `schemas/public_api/api.service_accounts.create.response.v1.json`
+- `schemas/public_api/api.service_accounts.list.response.v1.json`
+- `schemas/public_api/api.service_accounts.get.response.v1.json`
+- `schemas/public_api/api.service_accounts.keys.create.request.v1.json`
+- `schemas/public_api/api.service_accounts.keys.create.response.v1.json`
+- `schemas/public_api/api.service_accounts.keys.revoke.response.v1.json`
+
+### Planned Endpoint Mapping
+
+- `POST /v1/service-accounts`
+  - request: `api.service_accounts.create.request.v1.json`
+  - response: `api.service_accounts.create.response.v1.json`
+- `GET /v1/service-accounts?org_id=...&workspace_id=...`
+  - response: `api.service_accounts.list.response.v1.json`
+- `GET /v1/service-accounts/{service_account_id}`
+  - response: `api.service_accounts.get.response.v1.json`
+- `POST /v1/service-accounts/{service_account_id}/keys`
+  - request: `api.service_accounts.keys.create.request.v1.json`
+  - response: `api.service_accounts.keys.create.response.v1.json`
+- `POST /v1/service-accounts/{service_account_id}/keys/{key_id}/revoke`
+  - response: `api.service_accounts.keys.revoke.response.v1.json`
