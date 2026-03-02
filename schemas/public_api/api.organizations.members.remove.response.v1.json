@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.organizations.members.remove.response.v1.json",
+  "title": "ApiOrganizationsMembersRemoveResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "removed",
+    "org_id",
+    "member_id",
+    "removed_at"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "removed": {
+      "type": "boolean",
+      "const": true
+    },
+    "org_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "member_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "removed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

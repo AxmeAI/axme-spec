@@ -75,6 +75,29 @@ Track B extraction in progress.
   - `schemas/public_api/api.schemas.upsert.request.v1.json`
   - `schemas/public_api/api.schemas.upsert.response.v1.json`
   - `schemas/public_api/api.schemas.get.response.v1.json`
+- Public API schemas (enterprise access set, Track F phase 1):
+  - `schemas/public_api/api.organizations.create.request.v1.json`
+  - `schemas/public_api/api.organizations.create.response.v1.json`
+  - `schemas/public_api/api.organizations.get.response.v1.json`
+  - `schemas/public_api/api.organizations.update.request.v1.json`
+  - `schemas/public_api/api.organizations.update.response.v1.json`
+  - `schemas/public_api/api.organizations.workspaces.create.request.v1.json`
+  - `schemas/public_api/api.organizations.workspaces.create.response.v1.json`
+  - `schemas/public_api/api.organizations.workspaces.list.response.v1.json`
+  - `schemas/public_api/api.organizations.workspaces.update.request.v1.json`
+  - `schemas/public_api/api.organizations.workspaces.update.response.v1.json`
+  - `schemas/public_api/api.organizations.members.list.response.v1.json`
+  - `schemas/public_api/api.organizations.members.add.request.v1.json`
+  - `schemas/public_api/api.organizations.members.add.response.v1.json`
+  - `schemas/public_api/api.organizations.members.update.request.v1.json`
+  - `schemas/public_api/api.organizations.members.update.response.v1.json`
+  - `schemas/public_api/api.organizations.members.remove.response.v1.json`
+  - `schemas/public_api/api.access_requests.create.request.v1.json`
+  - `schemas/public_api/api.access_requests.create.response.v1.json`
+  - `schemas/public_api/api.access_requests.list.response.v1.json`
+  - `schemas/public_api/api.access_requests.get.response.v1.json`
+  - `schemas/public_api/api.access_requests.review.request.v1.json`
+  - `schemas/public_api/api.access_requests.review.response.v1.json`
 - Schema validation script, tests, and CI gate
 
 ## Development

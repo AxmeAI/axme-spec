@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.organizations.workspaces.create.request.v1.json",
+  "title": "ApiOrganizationsWorkspacesCreateRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "org_id",
+    "name",
+    "environment"
+  ],
+  "properties": {
+    "org_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 120
+    },
+    "environment": {
+      "type": "string",
+      "enum": [
+        "sandbox",
+        "staging",
+        "production"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 64
+    }
+  }
+}

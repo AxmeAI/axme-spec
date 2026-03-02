@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.organizations.update.request.v1.json",
+  "title": "ApiOrganizationsUpdateRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "org_id"
+  ],
+  "properties": {
+    "org_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 120
+    },
+    "legal_name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 255
+    },
+    "primary_domain": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "active",
+        "suspended",
+        "archived"
+      ]
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

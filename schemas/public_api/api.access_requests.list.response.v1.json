@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.access_requests.list.response.v1.json",
+  "title": "ApiAccessRequestsListResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "access_requests"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "access_requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "access_request_id",
+          "request_type",
+          "state",
+          "requester_actor_id",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "access_request_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "request_type": {
+            "type": "string",
+            "enum": [
+              "create_organization",
+              "join_organization",
+              "elevated_role"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "under_review",
+              "approved",
+              "rejected",
+              "waitlisted",
+              "expired"
+            ]
+          },
+          "requester_actor_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "org_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "workspace_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "requested_role": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "org_owner",
+              "org_admin",
+              "workspace_admin",
+              "member",
+              "billing_viewer",
+              "security_auditor",
+              null
+            ]
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 2,
+            "maxLength": 255
+          },
+          "justification": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 4000
+          },
+          "reviewer_actor_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "review_comment": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 4000
+          },
+          "reviewed_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.organizations.create.request.v1.json",
+  "title": "ApiOrganizationsCreateRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "requested_by_actor_id"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 120
+    },
+    "legal_name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 255
+    },
+    "primary_domain": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "requested_by_actor_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}
