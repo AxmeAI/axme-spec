@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.billing.plan.update.response.v1.json",
+  "title": "ApiBillingPlanUpdateResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "billing_plan"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "billing_plan": {
+      "$ref": "#/$defs/billing_plan"
+    }
+  },
+  "$defs": {
+    "billing_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "billing_plan_id",
+        "org_id",
+        "workspace_id",
+        "plan_code",
+        "currency",
+        "billing_cycle",
+        "monthly_commit_minor",
+        "seats_included",
+        "overage_unit_price_minor",
+        "status",
+        "updated_by_actor_id",
+        "metadata",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "billing_plan_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "org_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "workspace_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "plan_code": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 64
+        },
+        "currency": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 16
+        },
+        "billing_cycle": {
+          "type": "string",
+          "enum": [
+            "monthly",
+            "annual"
+          ]
+        },
+        "monthly_commit_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "seats_included": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "overage_unit_price_minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "suspended",
+            "inactive"
+          ]
+        },
+        "updated_by_actor_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
