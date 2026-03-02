@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.usage.summary.get.response.v1.json",
+  "title": "ApiUsageSummaryGetResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "summary"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "org_id",
+        "workspace_id",
+        "window_start",
+        "window_end",
+        "dimensions"
+      ],
+      "properties": {
+        "org_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "workspace_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "window_start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "window_end": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requests_per_minute",
+            "intents_per_day",
+            "inbox_writes_per_day",
+            "media_upload_bytes_per_day",
+            "media_storage_bytes",
+            "webhook_deliveries_per_day",
+            "schema_writes_per_day"
+          ],
+          "properties": {
+            "requests_per_minute": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "used",
+                "limit",
+                "remaining"
+              ],
+              "properties": {
+                "used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "remaining": {
+                  "type": "integer"
+                }
+              }
+            },
+            "intents_per_day": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "used",
+                "limit",
+                "remaining"
+              ],
+              "properties": {
+                "used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "remaining": {
+                  "type": "integer"
+                }
+              }
+            },
+            "inbox_writes_per_day": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "used",
+                "limit",
+                "remaining"
+              ],
+              "properties": {
+                "used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "remaining": {
+                  "type": "integer"
+                }
+              }
+            },
+            "media_upload_bytes_per_day": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "used",
+                "limit",
+                "remaining"
+              ],
+              "properties": {
+                "used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "remaining": {
+                  "type": "integer"
+                }
+              }
+            },
+            "media_storage_bytes": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "used",
+                "limit",
+                "remaining"
+              ],
+              "properties": {
+                "used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "remaining": {
+                  "type": "integer"
+                }
+              }
+            },
+            "webhook_deliveries_per_day": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "used",
+                "limit",
+                "remaining"
+              ],
+              "properties": {
+                "used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "remaining": {
+                  "type": "integer"
+                }
+              }
+            },
+            "schema_writes_per_day": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "used",
+                "limit",
+                "remaining"
+              ],
+              "properties": {
+                "used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "remaining": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

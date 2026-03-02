@@ -98,6 +98,12 @@ Track B extraction in progress.
   - `schemas/public_api/api.access_requests.get.response.v1.json`
   - `schemas/public_api/api.access_requests.review.request.v1.json`
   - `schemas/public_api/api.access_requests.review.response.v1.json`
+- Public API schemas (quota and usage set, Track F phase 1):
+  - `schemas/public_api/api.quotas.get.response.v1.json`
+  - `schemas/public_api/api.quotas.update.request.v1.json`
+  - `schemas/public_api/api.quotas.update.response.v1.json`
+  - `schemas/public_api/api.usage.summary.get.response.v1.json`
+  - `schemas/public_api/api.usage.timeseries.get.response.v1.json`
 - Schema validation script, tests, and CI gate
 
 ## Development

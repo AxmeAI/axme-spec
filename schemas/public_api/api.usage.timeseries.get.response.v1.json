@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.usage.timeseries.get.response.v1.json",
+  "title": "ApiUsageTimeseriesGetResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "series"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "series": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "org_id",
+        "workspace_id",
+        "granularity",
+        "points"
+      ],
+      "properties": {
+        "org_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "workspace_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "granularity": {
+          "type": "string",
+          "enum": [
+            "hour",
+            "day"
+          ]
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "at",
+              "dimensions"
+            ],
+            "properties": {
+              "at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dimensions": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "requests_per_minute",
+                  "intents_per_day",
+                  "inbox_writes_per_day",
+                  "media_upload_bytes_per_day",
+                  "media_storage_bytes",
+                  "webhook_deliveries_per_day",
+                  "schema_writes_per_day"
+                ],
+                "properties": {
+                  "requests_per_minute": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "intents_per_day": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "inbox_writes_per_day": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "media_upload_bytes_per_day": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "media_storage_bytes": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "webhook_deliveries_per_day": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "schema_writes_per_day": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.quotas.get.response.v1.json",
+  "title": "ApiQuotasGetResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "quota_policy"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "quota_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quota_policy_id",
+        "org_id",
+        "workspace_id",
+        "dimensions",
+        "soft_threshold_percent",
+        "overage_mode",
+        "updated_at"
+      ],
+      "properties": {
+        "quota_policy_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "org_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "workspace_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requests_per_minute",
+            "intents_per_day",
+            "inbox_writes_per_day",
+            "media_upload_bytes_per_day",
+            "media_storage_bytes",
+            "webhook_deliveries_per_day",
+            "schema_writes_per_day"
+          ],
+          "properties": {
+            "requests_per_minute": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "intents_per_day": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "inbox_writes_per_day": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "media_upload_bytes_per_day": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "media_storage_bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "webhook_deliveries_per_day": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "schema_writes_per_day": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "soft_threshold_percent": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "hard_enforcement": {
+          "type": "boolean"
+        },
+        "overage_mode": {
+          "type": "string",
+          "enum": [
+            "block",
+            "grace",
+            "bill_overage"
+          ]
+        },
+        "updated_by_actor_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
