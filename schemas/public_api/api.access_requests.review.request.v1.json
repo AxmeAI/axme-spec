@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.access_requests.review.request.v1.json",
+  "title": "ApiAccessRequestsReviewRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision",
+    "reviewer_actor_id"
+  ],
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": [
+        "approve",
+        "reject",
+        "waitlist"
+      ]
+    },
+    "reviewer_actor_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "review_comment": {
+      "type": "string",
+      "maxLength": 4000
+    }
+  }
+}

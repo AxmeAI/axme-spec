@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.access_requests.create.request.v1.json",
+  "title": "ApiAccessRequestsCreateRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_type",
+    "requester_actor_id"
+  ],
+  "properties": {
+    "request_type": {
+      "type": "string",
+      "enum": [
+        "create_organization",
+        "join_organization",
+        "elevated_role"
+      ]
+    },
+    "requester_actor_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "org_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "workspace_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "requested_role": {
+      "type": "string",
+      "enum": [
+        "org_owner",
+        "org_admin",
+        "workspace_admin",
+        "member",
+        "billing_viewer",
+        "security_auditor"
+      ]
+    },
+    "company_name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 255
+    },
+    "justification": {
+      "type": "string",
+      "maxLength": 4000
+    }
+  }
+}

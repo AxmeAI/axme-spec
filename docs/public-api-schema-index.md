@@ -164,3 +164,69 @@ Related artifacts:
   - response: `api.media.finalize_upload.response.v1.json`
 - `GET /v1/media/{upload_id}`
   - response: `api.media.get.response.v1.json`
+
+## Track F Phase 1 Families (Draft Contracts)
+
+### Files
+
+- `schemas/public_api/api.organizations.create.request.v1.json`
+- `schemas/public_api/api.organizations.create.response.v1.json`
+- `schemas/public_api/api.organizations.get.response.v1.json`
+- `schemas/public_api/api.organizations.update.request.v1.json`
+- `schemas/public_api/api.organizations.update.response.v1.json`
+- `schemas/public_api/api.organizations.workspaces.create.request.v1.json`
+- `schemas/public_api/api.organizations.workspaces.create.response.v1.json`
+- `schemas/public_api/api.organizations.workspaces.list.response.v1.json`
+- `schemas/public_api/api.organizations.workspaces.update.request.v1.json`
+- `schemas/public_api/api.organizations.workspaces.update.response.v1.json`
+- `schemas/public_api/api.organizations.members.list.response.v1.json`
+- `schemas/public_api/api.organizations.members.add.request.v1.json`
+- `schemas/public_api/api.organizations.members.add.response.v1.json`
+- `schemas/public_api/api.organizations.members.update.request.v1.json`
+- `schemas/public_api/api.organizations.members.update.response.v1.json`
+- `schemas/public_api/api.organizations.members.remove.response.v1.json`
+- `schemas/public_api/api.access_requests.create.request.v1.json`
+- `schemas/public_api/api.access_requests.create.response.v1.json`
+- `schemas/public_api/api.access_requests.list.response.v1.json`
+- `schemas/public_api/api.access_requests.get.response.v1.json`
+- `schemas/public_api/api.access_requests.review.request.v1.json`
+- `schemas/public_api/api.access_requests.review.response.v1.json`
+
+### Planned Endpoint Mapping
+
+- `POST /v1/organizations`
+  - request: `api.organizations.create.request.v1.json`
+  - response: `api.organizations.create.response.v1.json`
+- `GET /v1/organizations/{org_id}`
+  - response: `api.organizations.get.response.v1.json`
+- `PATCH /v1/organizations/{org_id}`
+  - request: `api.organizations.update.request.v1.json`
+  - response: `api.organizations.update.response.v1.json`
+- `POST /v1/organizations/{org_id}/workspaces`
+  - request: `api.organizations.workspaces.create.request.v1.json`
+  - response: `api.organizations.workspaces.create.response.v1.json`
+- `GET /v1/organizations/{org_id}/workspaces`
+  - response: `api.organizations.workspaces.list.response.v1.json`
+- `PATCH /v1/organizations/{org_id}/workspaces/{workspace_id}`
+  - request: `api.organizations.workspaces.update.request.v1.json`
+  - response: `api.organizations.workspaces.update.response.v1.json`
+- `GET /v1/organizations/{org_id}/members`
+  - response: `api.organizations.members.list.response.v1.json`
+- `POST /v1/organizations/{org_id}/members`
+  - request: `api.organizations.members.add.request.v1.json`
+  - response: `api.organizations.members.add.response.v1.json`
+- `PATCH /v1/organizations/{org_id}/members/{member_id}`
+  - request: `api.organizations.members.update.request.v1.json`
+  - response: `api.organizations.members.update.response.v1.json`
+- `DELETE /v1/organizations/{org_id}/members/{member_id}`
+  - response: `api.organizations.members.remove.response.v1.json`
+- `POST /v1/access-requests`
+  - request: `api.access_requests.create.request.v1.json`
+  - response: `api.access_requests.create.response.v1.json`
+- `GET /v1/access-requests`
+  - response: `api.access_requests.list.response.v1.json`
+- `GET /v1/access-requests/{access_request_id}`
+  - response: `api.access_requests.get.response.v1.json`
+- `POST /v1/access-requests/{access_request_id}/review`
+  - request: `api.access_requests.review.request.v1.json`
+  - response: `api.access_requests.review.response.v1.json`

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.organizations.members.add.request.v1.json",
+  "title": "ApiOrganizationsMembersAddRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "org_id",
+    "actor_id",
+    "role"
+  ],
+  "properties": {
+    "org_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "workspace_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "actor_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "org_owner",
+        "org_admin",
+        "workspace_admin",
+        "member",
+        "billing_viewer",
+        "security_auditor"
+      ]
+    },
+    "invited_by_actor_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  }
+}
