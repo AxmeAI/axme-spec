@@ -30,6 +30,9 @@ Track B extraction in progress.
   - `schemas/public_api/api.intents.create.request.v1.json`
   - `schemas/public_api/api.intents.create.response.v1.json`
   - `schemas/public_api/api.intents.get.response.v1.json`
+  - `schemas/public_api/api.intents.events.list.response.v1.json`
+  - `schemas/public_api/api.intents.resolve.request.v1.json`
+  - `schemas/public_api/api.intents.resolve.response.v1.json`
   - `schemas/public_api/api.approvals.decision.request.v1.json`
   - `schemas/public_api/api.approvals.decision.response.v1.json`
   - `schemas/public_api/api.capabilities.get.response.v1.json`

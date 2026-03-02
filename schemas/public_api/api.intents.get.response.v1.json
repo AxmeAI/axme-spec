@@ -32,7 +32,28 @@
           "format": "uuid"
         },
         "status": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "CREATED",
+            "SUBMITTED",
+            "DELIVERED",
+            "ACKNOWLEDGED",
+            "IN_PROGRESS",
+            "WAITING",
+            "COMPLETED",
+            "FAILED",
+            "CANCELED"
+          ]
+        },
+        "legacy_status": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "running",
+            "blocked",
+            "done",
+            "failed"
+          ]
         },
         "created_at": {
           "type": "string",
