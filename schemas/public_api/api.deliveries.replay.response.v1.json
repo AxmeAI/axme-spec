@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.deliveries.replay.response.v1.json",
+  "title": "ApiDeliveriesReplayResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "delivery"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "delivery": {
+      "$ref": "#/$defs/delivery"
+    }
+  },
+  "$defs": {
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "delivery_id",
+        "replay_of_delivery_id",
+        "org_id",
+        "workspace_id",
+        "principal_id",
+        "alias",
+        "transport_type",
+        "route_id",
+        "status",
+        "correlation_id",
+        "idempotency_key",
+        "payload",
+        "error_detail",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "delivery_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "replay_of_delivery_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 3
+        },
+        "org_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "workspace_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "principal_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "alias": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "transport_type": {
+          "type": "string",
+          "enum": [
+            "matrix",
+            "http",
+            "queue",
+            "webhook"
+          ]
+        },
+        "route_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "submitted",
+            "delivered",
+            "failed",
+            "pending",
+            "dead_lettered"
+          ]
+        },
+        "correlation_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "idempotency_key": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 4,
+          "maxLength": 255
+        },
+        "payload": {
+          "type": "object"
+        },
+        "error_detail": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

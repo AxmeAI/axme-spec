@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.transports.bindings.upsert.request.v1.json",
+  "title": "ApiTransportsBindingsUpsertRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "principal_id",
+    "transport_type",
+    "transport_handle"
+  ],
+  "properties": {
+    "principal_id": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 64
+    },
+    "transport_type": {
+      "type": "string",
+      "enum": [
+        "matrix",
+        "http",
+        "queue",
+        "webhook"
+      ]
+    },
+    "transport_handle": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 255
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

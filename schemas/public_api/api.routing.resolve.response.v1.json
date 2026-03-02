@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.routing.resolve.response.v1.json",
+  "title": "ApiRoutingResolveResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "resolution"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alias",
+        "principal",
+        "selected_route",
+        "candidate_routes",
+        "resolver_chain"
+      ],
+      "properties": {
+        "alias": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": true
+        },
+        "principal": {
+          "$ref": "#/$defs/principal"
+        },
+        "selected_route": {
+          "$ref": "#/$defs/route"
+        },
+        "candidate_routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/route"
+          }
+        },
+        "resolver_chain": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "const": [
+            "alias",
+            "principal_id",
+            "endpoint_route",
+            "transport_dispatch"
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "principal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "principal_id",
+        "org_id",
+        "workspace_id",
+        "principal_type",
+        "status",
+        "metadata",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "org_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "workspace_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "principal_type": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route_id",
+        "principal_id",
+        "org_id",
+        "workspace_id",
+        "transport_type",
+        "endpoint_url",
+        "auth_mode",
+        "failover_policy",
+        "priority",
+        "health_status",
+        "status",
+        "metadata",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "route_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "principal_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "org_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "workspace_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "transport_type": {
+          "type": "string",
+          "enum": [
+            "matrix",
+            "http",
+            "queue",
+            "webhook"
+          ]
+        },
+        "endpoint_url": {
+          "type": "string",
+          "minLength": 8
+        },
+        "auth_mode": {
+          "type": "string",
+          "enum": [
+            "mtls",
+            "jwt",
+            "signed_key",
+            "none"
+          ]
+        },
+        "region": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cluster_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "failover_policy": {
+          "type": "string",
+          "enum": [
+            "none",
+            "same_region",
+            "cross_region"
+          ]
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "health_status": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

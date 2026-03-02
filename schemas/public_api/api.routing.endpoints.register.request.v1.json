@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.routing.endpoints.register.request.v1.json",
+  "title": "ApiRoutingEndpointsRegisterRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "principal_id",
+    "transport_type",
+    "endpoint_url",
+    "auth_mode"
+  ],
+  "properties": {
+    "principal_id": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 64
+    },
+    "transport_type": {
+      "type": "string",
+      "enum": [
+        "matrix",
+        "http",
+        "queue",
+        "webhook"
+      ]
+    },
+    "endpoint_url": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 4096
+    },
+    "auth_mode": {
+      "type": "string",
+      "enum": [
+        "mtls",
+        "jwt",
+        "signed_key",
+        "none"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 64
+    },
+    "cluster_id": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 128
+    },
+    "failover_policy": {
+      "type": "string",
+      "enum": [
+        "none",
+        "same_region",
+        "cross_region"
+      ]
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

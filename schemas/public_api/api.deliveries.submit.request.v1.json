@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.deliveries.submit.request.v1.json",
+  "title": "ApiDeliveriesSubmitRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "org_id",
+    "workspace_id",
+    "payload"
+  ],
+  "properties": {
+    "org_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "workspace_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "alias": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "principal_id": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 64
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 255
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "alias"
+      ]
+    },
+    {
+      "required": [
+        "principal_id"
+      ]
+    }
+  ]
+}

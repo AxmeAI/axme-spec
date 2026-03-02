@@ -284,3 +284,79 @@ Related artifacts:
   - response: `api.service_accounts.keys.create.response.v1.json`
 - `POST /v1/service-accounts/{service_account_id}/keys/{key_id}/revoke`
   - response: `api.service_accounts.keys.revoke.response.v1.json`
+
+## Track F Phase 3 Naming, Routing, Transports, Deliveries Families (Draft Contracts)
+
+### Files
+
+- `schemas/public_api/api.principals.create.request.v1.json`
+- `schemas/public_api/api.principals.create.response.v1.json`
+- `schemas/public_api/api.principals.get.response.v1.json`
+- `schemas/public_api/api.aliases.bind.request.v1.json`
+- `schemas/public_api/api.aliases.bind.response.v1.json`
+- `schemas/public_api/api.aliases.list.response.v1.json`
+- `schemas/public_api/api.aliases.revoke.response.v1.json`
+- `schemas/public_api/api.aliases.resolve.response.v1.json`
+- `schemas/public_api/api.routing.endpoints.register.request.v1.json`
+- `schemas/public_api/api.routing.endpoints.register.response.v1.json`
+- `schemas/public_api/api.routing.endpoints.list.response.v1.json`
+- `schemas/public_api/api.routing.endpoints.update.request.v1.json`
+- `schemas/public_api/api.routing.endpoints.update.response.v1.json`
+- `schemas/public_api/api.routing.endpoints.remove.response.v1.json`
+- `schemas/public_api/api.routing.resolve.request.v1.json`
+- `schemas/public_api/api.routing.resolve.response.v1.json`
+- `schemas/public_api/api.transports.bindings.upsert.request.v1.json`
+- `schemas/public_api/api.transports.bindings.upsert.response.v1.json`
+- `schemas/public_api/api.transports.bindings.list.response.v1.json`
+- `schemas/public_api/api.transports.bindings.remove.response.v1.json`
+- `schemas/public_api/api.deliveries.submit.request.v1.json`
+- `schemas/public_api/api.deliveries.submit.response.v1.json`
+- `schemas/public_api/api.deliveries.list.response.v1.json`
+- `schemas/public_api/api.deliveries.get.response.v1.json`
+- `schemas/public_api/api.deliveries.replay.response.v1.json`
+
+### Planned Endpoint Mapping
+
+- `POST /v1/principals`
+  - request: `api.principals.create.request.v1.json`
+  - response: `api.principals.create.response.v1.json`
+- `GET /v1/principals/{principal_id}`
+  - response: `api.principals.get.response.v1.json`
+- `POST /v1/aliases`
+  - request: `api.aliases.bind.request.v1.json`
+  - response: `api.aliases.bind.response.v1.json`
+- `GET /v1/aliases`
+  - response: `api.aliases.list.response.v1.json`
+- `POST /v1/aliases/{alias_id}/revoke`
+  - response: `api.aliases.revoke.response.v1.json`
+- `GET /v1/aliases/resolve?org_id=...&workspace_id=...&alias=...`
+  - response: `api.aliases.resolve.response.v1.json`
+- `POST /v1/routing/endpoints`
+  - request: `api.routing.endpoints.register.request.v1.json`
+  - response: `api.routing.endpoints.register.response.v1.json`
+- `GET /v1/routing/endpoints`
+  - response: `api.routing.endpoints.list.response.v1.json`
+- `PATCH /v1/routing/endpoints/{route_id}`
+  - request: `api.routing.endpoints.update.request.v1.json`
+  - response: `api.routing.endpoints.update.response.v1.json`
+- `DELETE /v1/routing/endpoints/{route_id}`
+  - response: `api.routing.endpoints.remove.response.v1.json`
+- `POST /v1/routing/resolve`
+  - request: `api.routing.resolve.request.v1.json`
+  - response: `api.routing.resolve.response.v1.json`
+- `POST /v1/transports/bindings`
+  - request: `api.transports.bindings.upsert.request.v1.json`
+  - response: `api.transports.bindings.upsert.response.v1.json`
+- `GET /v1/transports/bindings`
+  - response: `api.transports.bindings.list.response.v1.json`
+- `DELETE /v1/transports/bindings/{binding_id}`
+  - response: `api.transports.bindings.remove.response.v1.json`
+- `POST /v1/deliveries`
+  - request: `api.deliveries.submit.request.v1.json`
+  - response: `api.deliveries.submit.response.v1.json`
+- `GET /v1/deliveries`
+  - response: `api.deliveries.list.response.v1.json`
+- `GET /v1/deliveries/{delivery_id}`
+  - response: `api.deliveries.get.response.v1.json`
+- `POST /v1/deliveries/{delivery_id}/replay`
+  - response: `api.deliveries.replay.response.v1.json`

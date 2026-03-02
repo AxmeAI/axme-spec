@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.aliases.bind.request.v1.json",
+  "title": "ApiAliasesBindRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "principal_id",
+    "alias",
+    "alias_type"
+  ],
+  "properties": {
+    "principal_id": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 64
+    },
+    "alias": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "alias_type": {
+      "type": "string",
+      "enum": [
+        "communication",
+        "service",
+        "external"
+      ]
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}

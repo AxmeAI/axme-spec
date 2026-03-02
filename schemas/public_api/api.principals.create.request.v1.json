@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.principals.create.request.v1.json",
+  "title": "ApiPrincipalsCreateRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "org_id",
+    "workspace_id",
+    "principal_type"
+  ],
+  "properties": {
+    "org_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "workspace_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "principal_type": {
+      "type": "string",
+      "enum": [
+        "user",
+        "service_agent",
+        "service_account"
+      ]
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "metadata": {
+      "type": "object"
+    }
+  }
+}
