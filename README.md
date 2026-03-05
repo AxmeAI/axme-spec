@@ -1,118 +1,122 @@
 # axme-spec
 
-AXP protocol specifications, schemas, and compatibility notes.
+**Canonical AXME protocol and public API schema repository.** This is the source of truth for all contract definitions consumed by the runtime, SDKs, documentation, and conformance suite.
 
-Canonical concept:
+> **Alpha** · Protocol and API surface are stabilizing. Not recommended for production workloads yet.  
+> Feedback and schema proposals welcome → [hello@axme.ai](mailto:hello@axme.ai)
 
-- **AXP is the Intent Protocol (durable execution layer).**
+---
 
-## Status
+## What Lives Here
 
-Track B extraction in progress.
+`axme-spec` owns the normative contracts for the entire AXME platform. Everything else — the runtime, SDKs, docs, and conformance tests — is derived from or validated against this repository.
 
-## Included in current extraction scope
+```
+axme-spec/
+├── schemas/
+│   ├── protocol/              # AXP wire protocol definitions (envelope, frames, versioning)
+│   └── public_api/            # Public REST API contracts (request/response/error schemas)
+├── docs/
+│   ├── diagrams/              # Schema-level visualizations
+│   ├── compatibility-policy.md
+│   ├── schema-governance.md
+│   └── versioning-strategy.md
+└── scripts/
+    └── validate_schemas.py
+```
 
-- Protocol schemas:
-  - `schemas/protocol/intent.ask.v1.json`
-  - `schemas/protocol/intent.envelope.v1.json`
-  - `schemas/protocol/intent.error.v1.json`
-  - `schemas/protocol/intent.reply.v1.json`
-  - `schemas/protocol/intent.status.v1.json`
-  - `schemas/protocol/message.delivery.v1.json`
-  - `schemas/protocol/message.envelope.v2.json`
-  - `schemas/protocol/message.envelope.v3.json`
-- Governance docs:
-  - `docs/public-api-schema-index.md`
-  - `docs/schema-versioning-rules.md`
-  - `docs/protocol-error-status-model.md`
-  - `docs/idempotency-correlation-rules.md`
-- Public API schemas (core set):
-  - `schemas/public_api/api.intents.create.request.v1.json`
-  - `schemas/public_api/api.intents.create.response.v1.json`
-  - `schemas/public_api/api.intents.get.response.v1.json`
-  - `schemas/public_api/api.intents.events.list.response.v1.json`
-  - `schemas/public_api/api.intents.resolve.request.v1.json`
-  - `schemas/public_api/api.intents.resolve.response.v1.json`
-  - `schemas/public_api/api.approvals.decision.request.v1.json`
-  - `schemas/public_api/api.approvals.decision.response.v1.json`
-  - `schemas/public_api/api.capabilities.get.response.v1.json`
-- Public API schemas (inbox set):
-  - `schemas/public_api/api.inbox.list.response.v1.json`
-  - `schemas/public_api/api.inbox.changes.response.v1.json`
-  - `schemas/public_api/api.inbox.thread.response.v1.json`
-  - `schemas/public_api/api.inbox.reply.request.v1.json`
-  - `schemas/public_api/api.inbox.messages.delete.request.v1.json`
-  - `schemas/public_api/api.inbox.messages.delete.response.v1.json`
-  - `schemas/public_api/api.inbox.delegate.request.v1.json`
-  - `schemas/public_api/api.inbox.decision.request.v1.json`
-- Public API schemas (webhooks set):
-  - `schemas/public_api/api.webhooks.events.request.v1.json`
-  - `schemas/public_api/api.webhooks.events.response.v1.json`
-  - `schemas/public_api/api.webhooks.events.replay.response.v1.json`
-  - `schemas/public_api/api.webhooks.subscriptions.upsert.request.v1.json`
-  - `schemas/public_api/api.webhooks.subscriptions.response.v1.json`
-  - `schemas/public_api/api.webhooks.subscriptions.list.response.v1.json`
-  - `schemas/public_api/api.webhooks.subscriptions.delete.response.v1.json`
-- Public API schemas (users/profile set):
-  - `schemas/public_api/api.users.register_nick.request.v1.json`
-  - `schemas/public_api/api.users.register_nick.response.v1.json`
-  - `schemas/public_api/api.users.check_nick.response.v1.json`
-  - `schemas/public_api/api.users.rename_nick.request.v1.json`
-  - `schemas/public_api/api.users.rename_nick.response.v1.json`
-  - `schemas/public_api/api.users.profile.get.response.v1.json`
-  - `schemas/public_api/api.users.profile.update.request.v1.json`
-  - `schemas/public_api/api.users.profile.update.response.v1.json`
-- Public API schemas (invites set):
-  - `schemas/public_api/api.invites.create.request.v1.json`
-  - `schemas/public_api/api.invites.create.response.v1.json`
-  - `schemas/public_api/api.invites.get.response.v1.json`
-  - `schemas/public_api/api.invites.accept.request.v1.json`
-  - `schemas/public_api/api.invites.accept.response.v1.json`
-- Public API schemas (media set):
-  - `schemas/public_api/api.media.create_upload.request.v1.json`
-  - `schemas/public_api/api.media.create_upload.response.v1.json`
-  - `schemas/public_api/api.media.finalize_upload.request.v1.json`
-  - `schemas/public_api/api.media.finalize_upload.response.v1.json`
-  - `schemas/public_api/api.media.get.response.v1.json`
-- Public API schemas (schemas set):
-  - `schemas/public_api/api.schemas.upsert.request.v1.json`
-  - `schemas/public_api/api.schemas.upsert.response.v1.json`
-  - `schemas/public_api/api.schemas.get.response.v1.json`
-- Public API schemas (enterprise access set, Track F phase 1):
-  - `schemas/public_api/api.organizations.create.request.v1.json`
-  - `schemas/public_api/api.organizations.create.response.v1.json`
-  - `schemas/public_api/api.organizations.get.response.v1.json`
-  - `schemas/public_api/api.organizations.update.request.v1.json`
-  - `schemas/public_api/api.organizations.update.response.v1.json`
-  - `schemas/public_api/api.organizations.workspaces.create.request.v1.json`
-  - `schemas/public_api/api.organizations.workspaces.create.response.v1.json`
-  - `schemas/public_api/api.organizations.workspaces.list.response.v1.json`
-  - `schemas/public_api/api.organizations.workspaces.update.request.v1.json`
-  - `schemas/public_api/api.organizations.workspaces.update.response.v1.json`
-  - `schemas/public_api/api.organizations.members.list.response.v1.json`
-  - `schemas/public_api/api.organizations.members.add.request.v1.json`
-  - `schemas/public_api/api.organizations.members.add.response.v1.json`
-  - `schemas/public_api/api.organizations.members.update.request.v1.json`
-  - `schemas/public_api/api.organizations.members.update.response.v1.json`
-  - `schemas/public_api/api.organizations.members.remove.response.v1.json`
-  - `schemas/public_api/api.access_requests.create.request.v1.json`
-  - `schemas/public_api/api.access_requests.create.response.v1.json`
-  - `schemas/public_api/api.access_requests.list.response.v1.json`
-  - `schemas/public_api/api.access_requests.get.response.v1.json`
-  - `schemas/public_api/api.access_requests.review.request.v1.json`
-  - `schemas/public_api/api.access_requests.review.response.v1.json`
-- Public API schemas (quota and usage set, Track F phase 1):
-  - `schemas/public_api/api.quotas.get.response.v1.json`
-  - `schemas/public_api/api.quotas.update.request.v1.json`
-  - `schemas/public_api/api.quotas.update.response.v1.json`
-  - `schemas/public_api/api.usage.summary.get.response.v1.json`
-  - `schemas/public_api/api.usage.timeseries.get.response.v1.json`
-- Schema validation script, tests, and CI gate
+---
 
-## Development
+## Protocol Envelope
+
+The AXP envelope wraps every intent. It carries the payload, sender identity, schema version, idempotency key, and a cryptographic signature applied at the gateway boundary.
+
+![AXP Protocol Envelope](docs/diagrams/01-protocol-envelope.svg)
+
+*Each field in the envelope is normatively defined here. The runtime and all SDKs must conform to these field names, types, and validation rules.*
+
+---
+
+## Schema Versioning and Deprecation
+
+Schemas follow a three-phase lifecycle: stable → deprecated → removed. Breaking changes require a new major schema version. Additive changes are backward-compatible.
+
+![Versioning and Deprecation Flow](docs/diagrams/02-versioning-and-deprecation-flow.svg)
+
+*A schema version enters deprecation with a minimum 90-day notice period. Clients targeting a deprecated version receive `Deprecation` response headers. Removal is announced in the migration guide.*
+
+---
+
+## Schema Governance and Compatibility
+
+All schema changes go through a governance review before landing. The compatibility matrix ensures no existing consumer breaks across patch and minor versions.
+
+![Schema Governance and Compatibility](docs/diagrams/04-schema-governance-compatibility.svg)
+
+*Governance steps: proposal → impact analysis → compatibility check → reviewer sign-off → merge → changelog entry → docs sync.*
+
+---
+
+## Intent Payload Extensibility
+
+Intent schemas are typed by `intent_type`. The payload field is a structured JSON object defined per type — not a free-form blob. This ensures every intent carries a machine-readable, versioned contract.
+
+![Intent Payload Extensibility and Semantic Schemas](docs/diagrams/09-intent-payload-extensibility-and-semantic-schemas.svg)
+
+*Businesses define their own `intent_type` namespaces. The platform validates the payload against the registered schema for that type. Custom fields are allowed in designated extension zones.*
+
+---
+
+## Public API Error Model
+
+All error responses follow a uniform model: HTTP status + machine-readable error code + retriability hint.
+
+![Public API Error Model and Retriability](docs/diagrams/02-error-model-retriability.svg)
+
+*`4xx` errors are client errors and are not retried. `5xx` errors carry a `Retry-After` hint. Idempotency-safe operations can be safely retried with the original idempotency key.*
+
+---
+
+## Integration Rule
+
+A contract family is considered complete only when it is aligned across all five layers:
+
+1. **`axme-spec`** — normative schema definition (this repo)
+2. **`axme-docs`** — OpenAPI artifact and narrative documentation
+3. **SDK clients** — implemented and tested method in each of the five SDKs
+4. **`axme-conformance`** — conformance check covering the contract
+5. **Runtime** — `axme-control-plane` behavior matches the schema
+
+---
+
+## Validation
 
 ```bash
 python -m pip install -e ".[dev]"
 python scripts/validate_schemas.py
 pytest
 ```
+
+---
+
+## Related Repositories
+
+| Repository | Relationship |
+|---|---|
+| [axme-docs](https://github.com/AxmeAI/axme-docs) | Derives OpenAPI artifacts and narrative docs from these schemas |
+| [axme-conformance](https://github.com/AxmeAI/axme-conformance) | Validates runtime and SDK behavior against these contracts |
+| Control-plane runtime (private) | Runtime implementation must conform to schemas defined here |
+| [axme-sdk-python](https://github.com/AxmeAI/axme-sdk-python) | Python client — API surface derived from these contracts |
+| [axme-sdk-typescript](https://github.com/AxmeAI/axme-sdk-typescript) | TypeScript client |
+| [axme-sdk-go](https://github.com/AxmeAI/axme-sdk-go) | Go client |
+| [axme-sdk-java](https://github.com/AxmeAI/axme-sdk-java) | Java client |
+| [axme-sdk-dotnet](https://github.com/AxmeAI/axme-sdk-dotnet) | .NET client |
+
+---
+
+## Contributing & Contact
+
+- Schema proposals and breaking-change requests: open an issue with label `schema-proposal`
+- Alpha program and early integration access: [hello@axme.ai](mailto:hello@axme.ai)
+- Security disclosures: see [SECURITY.md](SECURITY.md)
+- Contribution guidelines: [CONTRIBUTING.md](CONTRIBUTING.md)
