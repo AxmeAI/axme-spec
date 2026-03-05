@@ -105,7 +105,7 @@ pytest
 |---|---|
 | [axme-docs](https://github.com/AxmeAI/axme-docs) | Derives OpenAPI artifacts and narrative docs from these schemas |
 | [axme-conformance](https://github.com/AxmeAI/axme-conformance) | Validates runtime and SDK behavior against these contracts |
-| [axme-control-plane](https://github.com/AxmeAI/axme-control-plane) | Runtime implementation — must conform to schemas defined here |
+| Control-plane runtime (private) | Runtime implementation must conform to schemas defined here |
 | [axme-sdk-python](https://github.com/AxmeAI/axme-sdk-python) | Python client — API surface derived from these contracts |
 | [axme-sdk-typescript](https://github.com/AxmeAI/axme-sdk-typescript) | TypeScript client |
 | [axme-sdk-go](https://github.com/AxmeAI/axme-sdk-go) | Go client |
