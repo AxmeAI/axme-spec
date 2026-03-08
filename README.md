@@ -55,12 +55,20 @@ axme-spec/
 │   └── public_api/            # Public REST API contracts (request/response/error schemas)
 ├── docs/
 │   ├── diagrams/              # Schema-level visualizations
-│   ├── compatibility-policy.md
-│   ├── schema-governance.md
-│   └── versioning-strategy.md
+│   ├── ADR-001-protocol-name.md
+│   ├── ADR-004-synapse-no-modification-policy.md
+│   ├── ADR-005-matrix-transport-e2ee-rollout.md
+│   ├── ADR-006-intent-lifecycle-v1.md
+│   ├── idempotency-correlation-rules.md
+│   ├── intent-lifecycle-v1.md
+│   ├── protocol-error-status-model.md
+│   ├── public-api-schema-index.md
+│   └── schema-versioning-rules.md
 └── scripts/
     └── validate_schemas.py
 ```
+
+> **Note on ADRs:** ADR-001, ADR-004 through ADR-006 live here. ADR-002 (service boundaries) and ADR-003 (trust/consent model) are hosted in [`axme-docs`](https://github.com/AxmeAI/axme-docs/tree/main/docs) as they span the full platform rather than schema contracts specifically.
 
 ---
 
