@@ -76,7 +76,7 @@ axme-spec/
 
 The AXP envelope wraps every intent. It carries the payload, sender identity, schema version, idempotency key, and a cryptographic signature applied at the gateway boundary.
 
-![AXP Protocol Envelope](docs/diagrams/01-protocol-envelope.svg)
+![AXP Protocol Envelope](https://raw.githubusercontent.com/AxmeAI/axme-docs/main/docs/diagrams/protocol/01-protocol-envelope.svg)
 
 *Each field in the envelope is normatively defined here. The runtime and all SDKs must conform to these field names, types, and validation rules.*
 
@@ -86,7 +86,7 @@ The AXP envelope wraps every intent. It carries the payload, sender identity, sc
 
 Schemas follow a three-phase lifecycle: stable → deprecated → removed. Breaking changes require a new major schema version. Additive changes are backward-compatible.
 
-![Versioning and Deprecation Flow](docs/diagrams/02-versioning-and-deprecation-flow.svg)
+![Versioning and Deprecation Flow](https://raw.githubusercontent.com/AxmeAI/axme-docs/main/docs/diagrams/protocol/02-versioning-and-deprecation-flow.svg)
 
 *A schema version enters deprecation with a minimum 90-day notice period. Clients targeting a deprecated version receive `Deprecation` response headers. Removal is announced in the migration guide.*
 
@@ -96,7 +96,7 @@ Schemas follow a three-phase lifecycle: stable → deprecated → removed. Break
 
 All schema changes go through a governance review before landing. The compatibility matrix ensures no existing consumer breaks across patch and minor versions.
 
-![Schema Governance and Compatibility](docs/diagrams/04-schema-governance-compatibility.svg)
+![Schema Governance and Compatibility](https://raw.githubusercontent.com/AxmeAI/axme-docs/main/docs/diagrams/protocol/04-schema-governance-compatibility.svg)
 
 *Governance steps: proposal → impact analysis → compatibility check → reviewer sign-off → merge → changelog entry → docs sync.*
 
@@ -106,7 +106,7 @@ All schema changes go through a governance review before landing. The compatibil
 
 Intent schemas are typed by `intent_type`. The payload field is a structured JSON object defined per type — not a free-form blob. This ensures every intent carries a machine-readable, versioned contract.
 
-![Intent Payload Extensibility and Semantic Schemas](docs/diagrams/09-intent-payload-extensibility-and-semantic-schemas.svg)
+![Intent Payload Extensibility and Semantic Schemas](https://raw.githubusercontent.com/AxmeAI/axme-docs/main/docs/diagrams/intents/09-intent-payload-extensibility-and-semantic-schemas.svg)
 
 *Businesses define their own `intent_type` namespaces. The platform validates the payload against the registered schema for that type. Custom fields are allowed in designated extension zones.*
 
@@ -116,7 +116,7 @@ Intent schemas are typed by `intent_type`. The payload field is a structured JSO
 
 All error responses follow a uniform model: HTTP status + machine-readable error code + retriability hint.
 
-![Public API Error Model and Retriability](docs/diagrams/02-error-model-retriability.svg)
+![Public API Error Model and Retriability](https://raw.githubusercontent.com/AxmeAI/axme-docs/main/docs/diagrams/api/02-error-model-retriability.svg)
 
 *`4xx` errors are client errors and are not retried. `5xx` errors carry a `Retry-After` hint. Idempotency-safe operations can be safely retried with the original idempotency key.*
 
