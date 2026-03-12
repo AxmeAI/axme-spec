@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://axme.dev/schemas/public_api/api.scenarios.bundle.request.v1.json",
   "title": "ApiScenariosBundleRequestV1",
-  "description": "ScenarioBundle — one JSON document that provisions agents, compiles a workflow, and submits an intent in a single atomic operation.",
+  "description": "ScenarioBundle — one JSON document submitted to POST /v1/scenarios/apply that provisions agents, compiles a workflow, and submits an intent in a single atomic operation.",
   "type": "object",
   "additionalProperties": false,
   "required": ["scenario_id", "intent"],
