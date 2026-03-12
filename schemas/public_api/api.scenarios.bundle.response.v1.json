@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.scenarios.bundle.response.v1.json",
+  "title": "ApiScenariosBundleResponseV1",
+  "description": "Response from POST /v1/scenarios/bundle — returns the created (or idempotent-matched) intent plus provisioned agent addresses.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["intent_id", "scenario_id", "status"],
+  "properties": {
+    "intent_id": {
+      "type": "string",
+      "description": "UUID of the created or matched intent."
+    },
+    "scenario_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "description": "Initial lifecycle status of the intent.",
+      "enum": ["DELIVERED", "IN_PROGRESS", "WAITING"]
+    },
+    "pending_with": {
+      "type": "string",
+      "description": "Agent address or human contact currently holding the intent."
+    },
+    "workflow_compile_id": {
+      "type": "string",
+      "description": "ID of the compiled workflow run, if a workflow was compiled and started."
+    },
+    "idempotent": {
+      "type": "boolean",
+      "description": "True when an existing intent was returned rather than a new one created."
+    },
+    "agents": {
+      "type": "array",
+      "description": "Resolved agent addresses for each role specified in the bundle.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "address"],
+        "properties": {
+          "role": { "type": "string" },
+          "address": { "type": "string" },
+          "created": {
+            "type": "boolean",
+            "description": "True when the service account was freshly created by this request."
+          }
+        }
+      }
+    },
+    "deadline_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
