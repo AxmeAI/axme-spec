@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.tasks.list.response.v1.json",
+  "title": "ApiTasksListResponseV1",
+  "description": "Response for GET /v1/me/tasks — list of pending human tasks for the authenticated actor.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ok", "tasks"],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "tasks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/HumanTaskItem" }
+    }
+  },
+  "$defs": {
+    "HumanTaskItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intent_id", "intent_type", "status", "assigned_at", "human_task"],
+      "properties": {
+        "intent_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "intent_type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["WAITING"]
+        },
+        "from_agent": {
+          "type": "string",
+          "maxLength": 383
+        },
+        "assigned_at": {
+          "description": "When this task was assigned to the current actor.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "due_at": {
+          "description": "Deadline for responding — maps to deadline_at on the intent.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "human_task": {
+          "$ref": "#/$defs/HumanTaskSpec"
+        }
+      }
+    },
+    "HumanTaskSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "task_type": {
+          "type": "string",
+          "enum": [
+            "approval",
+            "review",
+            "clarification",
+            "provide_data",
+            "attach_file",
+            "manual_action",
+            "confirmation",
+            "validate_real_world",
+            "validate_output",
+            "assignment",
+            "delegation",
+            "reroute",
+            "override",
+            "escalate"
+          ]
+        },
+        "allowed_outcomes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "required_comment": {
+          "type": "boolean",
+          "default": false
+        },
+        "assignees": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 383
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "evidence_required": {
+          "type": "boolean",
+          "default": false
+        },
+        "form_schema": {
+          "type": "object",
+          "description": "JSON Schema (draft 2020-12) for validating task_result.data submitted by the human.",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}

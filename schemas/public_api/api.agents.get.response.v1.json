@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.agents.get.response.v1.json",
+  "title": "ApiAgentsGetResponseV1",
+  "description": "Response for GET /v1/agents/{address} — resolve a single registered agent address.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ok", "agent"],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["address", "service_account_id", "service_account_name", "status", "created_at"],
+      "properties": {
+        "address": {
+          "description": "Canonical agent address: agent://{org_slug}/{workspace_slug}/{sa_name}",
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 383
+        },
+        "service_account_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "service_account_name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "display_name": {
+          "type": ["string", "null"],
+          "maxLength": 255
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "suspended", "deleted"]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

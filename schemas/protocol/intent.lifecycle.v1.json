@@ -32,7 +32,8 @@
         "WAITING",
         "COMPLETED",
         "FAILED",
-        "CANCELED"
+        "CANCELED",
+        "TIMED_OUT"
       ]
     },
     "seq": {

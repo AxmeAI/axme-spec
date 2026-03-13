@@ -117,7 +117,7 @@
     "WorkflowStepSpec": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["step_id", "tool_id"],
+      "required": ["step_id"],
       "properties": {
         "step_id": {
           "type": "string",
@@ -127,9 +127,26 @@
         },
         "tool_id": {
           "type": "string",
-          "description": "Tool to execute at this step.",
+          "description": "Tool to execute at this step. Required unless runtime_type is set.",
           "minLength": 1,
           "maxLength": 255
+        },
+        "runtime_type": {
+          "type": "string",
+          "description": "Built-in AXME runtime primitive. When set, tool_id and assigned_to are not required. Mutually exclusive with tool_id for built-in steps.",
+          "enum": [
+            "human_approval",
+            "timeout",
+            "reminder",
+            "delay",
+            "escalation",
+            "notification"
+          ]
+        },
+        "runtime_config": {
+          "type": "object",
+          "description": "Configuration for the runtime_type primitive. Schema depends on the specific runtime_type.",
+          "additionalProperties": true
         },
         "assigned_to": {
           "type": "string",
@@ -213,6 +230,58 @@
         "description": {
           "type": "string",
           "maxLength": 2000
+        },
+        "task_type": {
+          "type": "string",
+          "description": "Semantic type of the human task. Determines the expected interaction pattern.",
+          "enum": [
+            "approval",
+            "review",
+            "clarification",
+            "provide_data",
+            "attach_file",
+            "manual_action",
+            "confirmation",
+            "validate_real_world",
+            "validate_output",
+            "assignment",
+            "delegation",
+            "reroute",
+            "override",
+            "escalate"
+          ]
+        },
+        "allowed_outcomes": {
+          "type": "array",
+          "description": "Permitted values for outcome in task_result. If set, resume will be rejected if outcome is not in this list.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "required_comment": {
+          "type": "boolean",
+          "description": "When true, task_result.comment must be non-empty for the resume to be accepted.",
+          "default": false
+        },
+        "assignees": {
+          "type": "array",
+          "description": "Role aliases or addresses of humans who may respond to this task. Replaces single 'contact' field.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 383
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "evidence_required": {
+          "type": "boolean",
+          "description": "When true, task_result must include a non-empty data.evidence field.",
+          "default": false
         },
         "form_schema": {
           "type": "object",
