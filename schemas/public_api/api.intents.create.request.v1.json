@@ -7,7 +7,6 @@
   "required": [
     "intent_type",
     "correlation_id",
-    "from_agent",
     "to_agent",
     "payload"
   ],
@@ -21,22 +20,79 @@
       "format": "uuid"
     },
     "from_agent": {
+      "description": "Deprecated — derived automatically from the API key. Accepted for backward compatibility but ignored by the server.",
       "type": "string",
       "minLength": 3,
-      "maxLength": 255
+      "maxLength": 383
     },
     "to_agent": {
       "type": "string",
       "minLength": 3,
-      "maxLength": 255
+      "maxLength": 383
     },
     "reply_to": {
       "type": "string",
       "minLength": 3,
-      "maxLength": 255
+      "maxLength": 383
     },
     "payload": {
       "type": "object"
+    },
+    "deadline_at": {
+      "description": "ISO-8601 UTC datetime after which the intent is automatically transitioned to TIMED_OUT.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "remind_after_seconds": {
+      "description": "Seconds after submission before the first reminder is sent to the human holder.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "remind_interval_seconds": {
+      "description": "Seconds between subsequent reminders after the first.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "max_reminders": {
+      "description": "Maximum number of reminders before escalating.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "escalate_to": {
+      "description": "Agent address or role alias to escalate to once max_reminders is reached.",
+      "type": "string",
+      "maxLength": 383
+    },
+    "max_delivery_attempts": {
+      "description": "Maximum delivery failures before transitioning to FAILED.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "human_task": {
+      "description": "Structured task description shown to the human when the intent is assigned to a human participant.",
+      "$ref": "#/$defs/HumanTaskSpec"
+    }
+  },
+  "$defs": {
+    "HumanTaskSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "form_schema": {
+          "type": "object",
+          "description": "JSON Schema (draft 2020-12) for validating task_result submitted by the human.",
+          "additionalProperties": true
+        }
+      }
     }
   }
 }

@@ -1,0 +1,343 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.scenarios.bundle.request.v1.json",
+  "title": "ApiScenariosBundleRequestV1",
+  "description": "ScenarioBundle — one JSON document submitted to POST /v1/scenarios/apply that provisions agents, compiles a workflow, and submits an intent in a single atomic operation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["scenario_id", "intent"],
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "description": "Stable identifier for this scenario definition, e.g. 'approval.nginx_rollout.v1'.",
+      "pattern": "^[a-z0-9_]+(?:\\.[a-z0-9_]+)*$",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "idempotency_key": {
+      "type": "string",
+      "description": "If provided, duplicate submissions with the same key return the original intent instead of creating a new one.",
+      "maxLength": 255
+    },
+    "agents": {
+      "type": "array",
+      "description": "Service-account agents that participate in this scenario.",
+      "items": { "$ref": "#/$defs/AgentSpec" },
+      "maxItems": 50
+    },
+    "humans": {
+      "type": "array",
+      "description": "Human participants (org members) that may be assigned approval or task steps.",
+      "items": { "$ref": "#/$defs/HumanSpec" },
+      "maxItems": 20
+    },
+    "workflow": {
+      "$ref": "#/$defs/WorkflowSpec",
+      "description": "Inline workflow definition or reference to a pre-compiled macro."
+    },
+    "intent": {
+      "$ref": "#/$defs/IntentSpec",
+      "description": "Intent submission settings — type, payload, deadline, reminders, delivery limits."
+    }
+  },
+  "$defs": {
+    "AgentSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "address"],
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Logical role alias used to reference this agent in workflow steps.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "address": {
+          "type": "string",
+          "description": "Agent address — either a short SA name or full agent:// URI.",
+          "minLength": 1,
+          "maxLength": 383
+        },
+        "create_if_missing": {
+          "type": "boolean",
+          "description": "If true, a service account is automatically created when the address is not registered.",
+          "default": false
+        },
+        "display_name": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "HumanSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "contact"],
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Logical role alias used to reference this human in workflow steps.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "contact": {
+          "type": "string",
+          "description": "Email address or org_member_id of the human participant.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "display_name": {
+          "type": "string",
+          "maxLength": 255
+        }
+      }
+    },
+    "WorkflowSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "macro_id": {
+          "type": "string",
+          "description": "ID of a pre-registered macro template to use. When set, 'steps' are used as parameter overrides only.",
+          "maxLength": 255
+        },
+        "steps": {
+          "type": "array",
+          "description": "Ordered list of workflow steps. Required when macro_id is not provided.",
+          "items": { "$ref": "#/$defs/WorkflowStepSpec" },
+          "minItems": 1,
+          "maxItems": 100
+        }
+      }
+    },
+    "WorkflowStepSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step_id"],
+      "properties": {
+        "step_id": {
+          "type": "string",
+          "description": "Unique step identifier within this workflow.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "tool_id": {
+          "type": "string",
+          "description": "Tool to execute at this step. Required unless runtime_type is set.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "runtime_type": {
+          "type": "string",
+          "description": "Built-in AXME runtime primitive. When set, tool_id and assigned_to are not required. Mutually exclusive with tool_id for built-in steps.",
+          "enum": [
+            "human_approval",
+            "timeout",
+            "reminder",
+            "delay",
+            "escalation",
+            "notification"
+          ]
+        },
+        "runtime_config": {
+          "type": "object",
+          "description": "Configuration for the runtime_type primitive. Schema depends on the specific runtime_type.",
+          "additionalProperties": true
+        },
+        "assigned_to": {
+          "type": "string",
+          "description": "Role alias or agent address that owns this step. Used to update pending_with on each workflow tick.",
+          "maxLength": 383
+        },
+        "requires_approval": {
+          "type": "boolean",
+          "description": "When true, the workflow pauses at this step until a human submits resume_intent with task_result.",
+          "default": false
+        },
+        "step_deadline_seconds": {
+          "type": "integer",
+          "description": "Maximum seconds this step may run before being failed with 'step_timeout'.",
+          "minimum": 1
+        },
+        "retry": {
+          "$ref": "#/$defs/RetryPolicy"
+        },
+        "human_task": {
+          "$ref": "#/$defs/HumanTaskSpec",
+          "description": "Structured task description shown to the human when requires_approval=true."
+        },
+        "remind_after_seconds": {
+          "type": "integer",
+          "description": "Seconds to wait before sending the first reminder to the human assigned to this step.",
+          "minimum": 1
+        },
+        "remind_interval_seconds": {
+          "type": "integer",
+          "description": "Seconds between subsequent reminders after the first.",
+          "minimum": 1
+        },
+        "max_reminders": {
+          "type": "integer",
+          "description": "Maximum number of reminders before escalating to escalate_to.",
+          "minimum": 1
+        },
+        "escalate_to": {
+          "type": "string",
+          "description": "Role alias or address to escalate to once max_reminders is reached.",
+          "maxLength": 383
+        },
+        "on_success": {
+          "type": "string",
+          "description": "step_id to transition to on success. Omit to end the workflow.",
+          "maxLength": 100
+        },
+        "on_failure": {
+          "type": "string",
+          "description": "step_id to transition to on failure. Omit to fail the workflow.",
+          "maxLength": 100
+        }
+      }
+    },
+    "RetryPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_retries": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "retry_delay_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 30
+        }
+      }
+    },
+    "HumanTaskSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "task_type": {
+          "type": "string",
+          "description": "Semantic type of the human task. Determines the expected interaction pattern.",
+          "enum": [
+            "approval",
+            "review",
+            "clarification",
+            "provide_data",
+            "attach_file",
+            "manual_action",
+            "confirmation",
+            "validate_real_world",
+            "validate_output",
+            "assignment",
+            "delegation",
+            "reroute",
+            "override",
+            "escalate"
+          ]
+        },
+        "allowed_outcomes": {
+          "type": "array",
+          "description": "Permitted values for outcome in task_result. If set, resume will be rejected if outcome is not in this list.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "required_comment": {
+          "type": "boolean",
+          "description": "When true, task_result.comment must be non-empty for the resume to be accepted.",
+          "default": false
+        },
+        "assignees": {
+          "type": "array",
+          "description": "Role aliases or addresses of humans who may respond to this task. Replaces single 'contact' field.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 383
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "evidence_required": {
+          "type": "boolean",
+          "description": "When true, task_result must include a non-empty data.evidence field.",
+          "default": false
+        },
+        "form_schema": {
+          "type": "object",
+          "description": "JSON Schema (draft 2020-12) for validating task_result submitted by the human.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "IntentSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Intent type identifier, e.g. 'approval.change.v1'.",
+          "pattern": "^[a-z0-9_]+(?:\\.[a-z0-9_]+)*$",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "payload": {
+          "type": "object",
+          "description": "Domain-specific data for this intent.",
+          "additionalProperties": true
+        },
+        "deadline_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 UTC datetime after which the intent is automatically transitioned to TIMED_OUT."
+        },
+        "remind_after_seconds": {
+          "type": "integer",
+          "description": "Seconds after which the first reminder is sent to the human holder.",
+          "minimum": 1
+        },
+        "remind_interval_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_reminders": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "escalate_to": {
+          "type": "string",
+          "maxLength": 383
+        },
+        "max_delivery_attempts": {
+          "type": "integer",
+          "description": "Maximum agent delivery failures before transitioning to FAILED.",
+          "minimum": 1
+        },
+        "human_task": {
+          "$ref": "#/$defs/HumanTaskSpec"
+        }
+      }
+    }
+  }
+}

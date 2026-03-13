@@ -33,7 +33,12 @@
         "intent.failed",
         "intent.canceled",
         "intent.transfer",
-        "intent.timeout"
+        "intent.timeout",
+        "intent.timed_out",
+        "intent.reminder",
+        "intent.escalated",
+        "intent.delivery_failed",
+        "intent.human_task_assigned"
       ]
     },
     "status": {
@@ -47,7 +52,8 @@
         "WAITING",
         "COMPLETED",
         "FAILED",
-        "CANCELED"
+        "CANCELED",
+        "TIMED_OUT"
       ]
     },
     "at": {

@@ -42,7 +42,8 @@
             "WAITING",
             "COMPLETED",
             "FAILED",
-            "CANCELED"
+            "CANCELED",
+            "TIMED_OUT"
           ]
         },
         "legacy_status": {
@@ -83,6 +84,58 @@
         },
         "payload": {
           "type": "object"
+        },
+        "deadline_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "remind_after_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "remind_interval_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_reminders": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "remind_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "escalate_to": {
+          "type": "string",
+          "maxLength": 383
+        },
+        "max_delivery_attempts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "delivery_attempt": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "human_task": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "pending_with": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["agent", "human", "internal"]
+            },
+            "ref": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
         }
       }
     }

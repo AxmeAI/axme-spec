@@ -22,16 +22,17 @@
     "status": {
       "type": "string",
       "enum": [
-        "CREATED",
-        "SUBMITTED",
-        "DELIVERED",
-        "ACKNOWLEDGED",
-        "IN_PROGRESS",
-        "WAITING",
-        "COMPLETED",
-        "FAILED",
-        "CANCELED"
-      ]
+            "CREATED",
+            "SUBMITTED",
+            "DELIVERED",
+            "ACKNOWLEDGED",
+            "IN_PROGRESS",
+            "WAITING",
+            "COMPLETED",
+            "FAILED",
+            "CANCELED",
+            "TIMED_OUT"
+          ]
     },
     "created_at": {
       "type": "string",
