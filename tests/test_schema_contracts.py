@@ -187,6 +187,38 @@ class TestIntentsCreateRequest:
     def test_defs_has_human_task_spec(self):
         assert "HumanTaskSpec" in self.schema.get("$defs", {})
 
+    def test_human_task_spec_has_task_type(self):
+        spec = self.schema["$defs"]["HumanTaskSpec"]["properties"]
+        assert "task_type" in spec
+        assert spec["task_type"]["type"] == "string"
+        assert "approval" in spec["task_type"]["enum"]
+
+    def test_human_task_spec_task_type_includes_v1_priorities(self):
+        task_types = self.schema["$defs"]["HumanTaskSpec"]["properties"]["task_type"]["enum"]
+        for t in ["approval", "review", "clarification", "manual_action", "confirmation",
+                  "assignment", "override"]:
+            assert t in task_types, f"Missing v1 priority task type: {t}"
+
+    def test_human_task_spec_has_allowed_outcomes(self):
+        spec = self.schema["$defs"]["HumanTaskSpec"]["properties"]
+        assert "allowed_outcomes" in spec
+        assert spec["allowed_outcomes"]["type"] == "array"
+
+    def test_human_task_spec_has_required_comment(self):
+        spec = self.schema["$defs"]["HumanTaskSpec"]["properties"]
+        assert "required_comment" in spec
+        assert spec["required_comment"]["type"] == "boolean"
+
+    def test_human_task_spec_has_assignees(self):
+        spec = self.schema["$defs"]["HumanTaskSpec"]["properties"]
+        assert "assignees" in spec
+        assert spec["assignees"]["type"] == "array"
+
+    def test_human_task_spec_has_evidence_required(self):
+        spec = self.schema["$defs"]["HumanTaskSpec"]["properties"]
+        assert "evidence_required" in spec
+        assert spec["evidence_required"]["type"] == "boolean"
+
 
 # ---------------------------------------------------------------------------
 # Group 4: api.intents.create.response — TIMED_OUT in status
