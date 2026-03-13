@@ -128,6 +128,17 @@
             null
           ]
         },
+        "pending_with": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "type": { "type": "string" },
+            "ref":  { "type": "string" },
+            "name": { "type": "string" }
+          }
+        },
         "handler": {
           "type": [
             "string",
