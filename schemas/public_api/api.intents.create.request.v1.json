@@ -87,6 +87,58 @@
           "type": "string",
           "maxLength": 2000
         },
+        "task_type": {
+          "type": "string",
+          "description": "Semantic type of the human task. Determines the expected interaction pattern.",
+          "enum": [
+            "approval",
+            "review",
+            "clarification",
+            "provide_data",
+            "attach_file",
+            "manual_action",
+            "confirmation",
+            "validate_real_world",
+            "validate_output",
+            "assignment",
+            "delegation",
+            "reroute",
+            "override",
+            "escalate"
+          ]
+        },
+        "allowed_outcomes": {
+          "type": "array",
+          "description": "Permitted values for outcome in task_result. If set, resume will be rejected if outcome is not in this list.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "required_comment": {
+          "type": "boolean",
+          "description": "When true, task_result.comment must be non-empty for the resume to be accepted.",
+          "default": false
+        },
+        "assignees": {
+          "type": "array",
+          "description": "Email addresses or org_member_ids of humans who may respond to this task.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 383
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "evidence_required": {
+          "type": "boolean",
+          "description": "When true, task_result must include a non-empty data.evidence field.",
+          "default": false
+        },
         "form_schema": {
           "type": "object",
           "description": "JSON Schema (draft 2020-12) for validating task_result submitted by the human.",
