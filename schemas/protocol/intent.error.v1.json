@@ -14,7 +14,17 @@
   "properties": {
     "code": {
       "type": "string",
-      "pattern": "^[a-z0-9_:.\\-]{3,128}$"
+      "pattern": "^[a-z0-9_:.\\-]{3,128}$",
+      "examples": [
+        "agent_not_found",
+        "invalid_agent_address",
+        "schema_invalid",
+        "auth_failed",
+        "policy_denied",
+        "delivery_failed",
+        "intent_timeout",
+        "internal_error"
+      ]
     },
     "message": {
       "type": "string",
