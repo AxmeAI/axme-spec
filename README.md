@@ -1,32 +1,43 @@
-# axme-spec
+# axp-spec
 
-**Canonical AXME protocol and public API schema repository.** Source of truth for all contract definitions consumed by the runtime, SDKs, documentation, and conformance suite.
+**Normative source of truth for all AXP protocol and public API contracts.**
 
-> **Alpha** - Protocol and API surface are stabilizing. Not recommended for production workloads yet.
-> Feedback and schema proposals welcome -> [hello@axme.ai](mailto:hello@axme.ai)
+[![Alpha](https://img.shields.io/badge/status-alpha-orange)](https://cloud.axme.ai/alpha/cli)
+[![License](https://img.shields.io/badge/license-see%20LICENSE-blue)](LICENSE)
+
+[axme](https://github.com/AxmeAI/axme) · [Docs](https://github.com/AxmeAI/axme-docs) · [Conformance](https://github.com/AxmeAI/axme-conformance)
 
 ---
 
-## What Is AXME?
+AXP is the open wire protocol behind AXME. This repo defines the normative contracts - everything else (runtime, SDKs, conformance suite) derives from or validates against these schemas.
 
-AXME is a coordination infrastructure for durable execution of long-running intents across distributed systems.
+---
 
-It provides a model for executing **intents** - requests that may take minutes, hours, or longer to complete - across services, agents, and human participants.
+## What Lives Here
 
-Durable execution where agents, services, and humans coordinate as equals.
+```
+axp-spec/
+├── schemas/
+│   ├── protocol/              # AXP wire protocol definitions (envelope, frames, versioning)
+│   └── public_api/            # Public REST API contracts (request/response/error schemas)
+├── docs/
+│   ├── diagrams/              # Schema-level visualizations
+│   ├── ADR-001-protocol-name.md
+│   ├── ADR-004-synapse-no-modification-policy.md
+│   ├── ADR-005-matrix-transport-e2ee-rollout.md
+│   ├── ADR-006-intent-lifecycle-v1.md
+│   ├── idempotency-correlation-rules.md
+│   ├── intent-lifecycle-v1.md
+│   ├── protocol-error-status-model.md
+│   ├── public-api-schema-index.md
+│   └── schema-versioning-rules.md
+└── scripts/
+    └── validate_schemas.py
+```
 
-## AXP - the Intent Protocol
+> **Note on ADRs:** ADR-001, ADR-004 through ADR-006 live here. ADR-002 (service boundaries) and ADR-003 (trust/consent model) are hosted in [`axme-docs`](https://github.com/AxmeAI/axme-docs/tree/main/docs) as they span the full platform rather than schema contracts specifically.
 
-At the core of AXME is **AXP (Intent Protocol)** - an open protocol that defines contracts and lifecycle rules for intent processing.
-
-AXP is not RPC. An intent is not a function call that returns immediately. It is a durable request with a tracked lifecycle - created, processed, waited on, completed or failed - across time, across machines, across trust boundaries.
-
-The open part of the platform includes:
-
-- the protocol specification and schemas (this repo)
-- [SDKs](https://github.com/AxmeAI/axme-sdk-python) and [CLI](https://github.com/AxmeAI/axme-cli) for integration
-- [conformance tests](https://github.com/AxmeAI/axme-conformance)
-- [implementation and integration documentation](https://github.com/AxmeAI/axme-docs)
+---
 
 ## Intent Lifecycle
 
@@ -53,6 +64,8 @@ CREATED -> ACCEPTED -> PROCESSING -> COMPLETED
 
 Waiting states are first-class. An intent can wait for hours or days and resume exactly where it left off.
 
+---
+
 ## Delivery Bindings
 
 Five ways to deliver an intent to an agent:
@@ -64,6 +77,8 @@ Five ways to deliver an intent to an agent:
 | **http** | Platform pushes to agent's URL (webhook with HMAC signature) | Serverless functions, existing APIs |
 | **inbox** | Human-facing task queue - tasks appear in CLI (`axme tasks list`) or email | Human-in-the-loop workflows |
 | **internal** | Runs inside the platform runtime - no external agent needed | Timeouts, reminders, approvals |
+
+---
 
 ## Runtime Steps
 
@@ -95,6 +110,8 @@ Eight structured task types for human-in-the-loop workflows:
 | **clarification** | Request missing context - comment required before proceeding |
 | **manual_action** | Complete a physical task and attach evidence - hardware swap, site inspection |
 
+---
+
 ## ScenarioBundle
 
 The simplest way to run a workflow - one JSON file:
@@ -113,17 +130,6 @@ axme scenarios apply scenario.json --watch
 
 This provisions agents, compiles the workflow, submits the intent, and streams lifecycle events - all in one command.
 
-## AXME Cloud
-
-**AXME Cloud** is the managed service that runs AXP in production together with **The Registry** (identity and routing).
-
-- Reliable intent delivery and retries
-- Lifecycle management for long-running operations
-- Human approval, timeouts, reminders, escalation - built in
-- Observability of intent status and execution history
-
-Quick start: [cloud.axme.ai/alpha/cli](https://cloud.axme.ai/alpha/cli)
-
 ---
 
 ## Protocol Envelope
@@ -133,34 +139,6 @@ The AXP envelope wraps every intent. It carries the payload, sender identity, sc
 ![AXP Protocol Envelope](https://raw.githubusercontent.com/AxmeAI/axme-docs/main/docs/diagrams/protocol/01-protocol-envelope.svg)
 
 *Each field in the envelope is normatively defined here. The runtime and all SDKs must conform to these field names, types, and validation rules.*
-
----
-
-## What Lives Here
-
-`axme-spec` owns the normative contracts for the entire AXME platform. Everything else - the runtime, SDKs, docs, and conformance tests - is derived from or validated against this repository.
-
-```
-axme-spec/
-├── schemas/
-│   ├── protocol/              # AXP wire protocol definitions (envelope, frames, versioning)
-│   └── public_api/            # Public REST API contracts (request/response/error schemas)
-├── docs/
-│   ├── diagrams/              # Schema-level visualizations
-│   ├── ADR-001-protocol-name.md
-│   ├── ADR-004-synapse-no-modification-policy.md
-│   ├── ADR-005-matrix-transport-e2ee-rollout.md
-│   ├── ADR-006-intent-lifecycle-v1.md
-│   ├── idempotency-correlation-rules.md
-│   ├── intent-lifecycle-v1.md
-│   ├── protocol-error-status-model.md
-│   ├── public-api-schema-index.md
-│   └── schema-versioning-rules.md
-└── scripts/
-    └── validate_schemas.py
-```
-
-> **Note on ADRs:** ADR-001, ADR-004 through ADR-006 live here. ADR-002 (service boundaries) and ADR-003 (trust/consent model) are hosted in [`axme-docs`](https://github.com/AxmeAI/axme-docs/tree/main/docs) as they span the full platform rather than schema contracts specifically.
 
 ---
 
@@ -214,7 +192,7 @@ All error responses follow a uniform model: HTTP status + machine-readable error
 
 A contract family is considered complete only when it is aligned across all five layers:
 
-1. **`axme-spec`** - normative schema definition (this repo)
+1. **`axp-spec`** - normative schema definition (this repo)
 2. **`axme-docs`** - OpenAPI artifact and narrative documentation
 3. **SDK clients** - implemented and tested method in each of the five SDKs
 4. **`axme-conformance`** - conformance check covering the contract
@@ -232,10 +210,11 @@ pytest
 
 ---
 
-## Contributing and Contact
+## Contributing
 
 - Schema proposals and breaking-change requests: open an issue with label `schema-proposal`
-- Quick Start: https://cloud.axme.ai/alpha/cli
-- Contact: [hello@axme.ai](mailto:hello@axme.ai)
-- Security disclosures: see [SECURITY.md](SECURITY.md)
 - Contribution guidelines: [CONTRIBUTING.md](CONTRIBUTING.md)
+
+---
+
+[hello@axme.ai](mailto:hello@axme.ai) · [@axme_ai](https://x.com/axme_ai) · [Security](SECURITY.md) · [License](LICENSE)
