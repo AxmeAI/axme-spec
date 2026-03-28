@@ -1,4 +1,4 @@
-# axme-spec
+# axp-spec
 
 **Normative source of truth for all AXP protocol and public API contracts.**
 
@@ -16,7 +16,7 @@ AXP is the open wire protocol behind AXME. This repo defines the normative contr
 ## What Lives Here
 
 ```
-axme-spec/
+axp-spec/
 ├── schemas/
 │   ├── protocol/              # AXP wire protocol definitions (envelope, frames, versioning)
 │   └── public_api/            # Public REST API contracts (request/response/error schemas)
@@ -192,7 +192,7 @@ All error responses follow a uniform model: HTTP status + machine-readable error
 
 A contract family is considered complete only when it is aligned across all five layers:
 
-1. **`axme-spec`** - normative schema definition (this repo)
+1. **`axp-spec`** - normative schema definition (this repo)
 2. **`axme-docs`** - OpenAPI artifact and narrative documentation
 3. **SDK clients** - implemented and tested method in each of the five SDKs
 4. **`axme-conformance`** - conformance check covering the contract

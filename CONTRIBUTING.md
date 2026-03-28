@@ -15,7 +15,7 @@ on API ergonomics.
 
 ## Reporting Issues
 
-Open a GitHub Issue at <https://github.com/AxmeAI/axme-spec/issues>. Include:
+Open a GitHub Issue at <https://github.com/AxmeAI/axp-spec/issues>. Include:
 
 - Which section of the spec is affected
 - What the inconsistency or problem is
