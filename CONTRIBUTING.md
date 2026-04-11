@@ -51,4 +51,4 @@ productive disagreement is welcome.
 
 ## Contact
 
-Questions or feedback: hello@axme.ai
+Questions or feedback: contact@axme.ai
