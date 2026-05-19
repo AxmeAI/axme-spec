@@ -41,6 +41,9 @@ Rules apply to:
 - `intent.error.v1.json`
 - `intent.lifecycle.v1.json`
 - `intent.event.v1.json`
+- `session.envelope.v1.json`
+- `session.lifecycle.v1.json`
+- `session.event.v1.json`
 
 ## Required Public API Schemas (v1 line)
 
@@ -60,3 +63,9 @@ Rules apply to:
 - `api.inbox.reply.request.v1.json`
 - `api.inbox.delegate.request.v1.json`
 - `api.inbox.decision.request.v1.json`
+- `api.sessions.create.request.v1.json`
+- `api.sessions.create.response.v1.json`
+- `api.sessions.get.response.v1.json`
+- `api.sessions.events.list.response.v1.json`
+- `api.sessions.messages.append.request.v1.json`
+- `api.sessions.list.response.v1.json`

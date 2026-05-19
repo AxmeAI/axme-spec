@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.sessions.list.response.v1.json",
+  "title": "ApiSessionsListResponseV1",
+  "description": "Unified visitor inbox: every session the authenticated visitor participates in, across all owners' agents. Scoped strictly by participation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "sessions"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "session_id",
+          "owner_agent",
+          "status",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "owner_agent": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 255
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "WAITING_OWNER",
+              "RESOLVED",
+              "CLOSED",
+              "PRUNED"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "last_activity_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "unread": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

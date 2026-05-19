@@ -1,29 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://axme.dev/schemas/protocol/intent.envelope.v1.json",
-  "title": "IntentEnvelopeV1",
+  "$id": "https://axme.dev/schemas/protocol/session.envelope.v1.json",
+  "title": "SessionEnvelopeV1",
+  "description": "Wire envelope identifying a Session. A Session is a first-class orchestrator (separate from Intent) that holds Messages and may spawn Intents.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "version",
-    "intent_type",
-    "intent_id",
+    "session_id",
     "correlation_id",
     "created_at",
-    "from_agent",
-    "to_agent",
-    "payload"
+    "owner_agent"
   ],
   "properties": {
     "version": {
       "type": "string",
       "const": "v1"
     },
-    "intent_type": {
-      "type": "string",
-      "pattern": "^intent\\.[a-z0-9_]+\\.v1$"
-    },
-    "intent_id": {
+    "session_id": {
       "type": "string",
       "format": "uuid"
     },
@@ -31,28 +25,21 @@
       "type": "string",
       "format": "uuid"
     },
-    "idempotency_key": {
-      "type": "string",
-      "minLength": 8,
-      "maxLength": 128
-    },
     "created_at": {
       "type": "string",
       "format": "date-time"
     },
-    "from_agent": {
+    "owner_agent": {
       "type": "string",
-      "minLength": 3
+      "minLength": 3,
+      "maxLength": 255
     },
-    "to_agent": {
+    "visitor_ref": {
       "type": "string",
-      "minLength": 3
+      "minLength": 1,
+      "maxLength": 255
     },
-    "payload": {
-      "type": "object"
-    },
-    "session_id": {
-      "description": "Optional. Set when this intent is spawned within a Session orchestrator (see session.envelope.v1).",
+    "parent_session_id": {
       "type": "string",
       "format": "uuid"
     },

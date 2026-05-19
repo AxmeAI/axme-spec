@@ -170,6 +170,48 @@ Related artifacts:
 - `GET /v1/media/{upload_id}`
   - response: `api.media.get.response.v1.json`
 
+## Sessions (anti-messenger / D-030)
+
+A Session is a first-class orchestrator (separate from Intent) that holds Messages
+(delivered over DB + SSE, never Pub/Sub) and may spawn manual Intents. Protocol
+artifacts:
+
+- `schemas/protocol/session.envelope.v1.json`
+- `schemas/protocol/session.lifecycle.v1.json`
+- `schemas/protocol/session.event.v1.json`
+
+Intent/message schemas carry an optional `session_id` (and `parent_intent_id` on
+`intent.lifecycle.v1`) to back-link work spawned within a Session. These additions
+are optional and backward-compatible (v1 line unchanged).
+
+### Files
+
+- `schemas/public_api/api.sessions.create.request.v1.json`
+- `schemas/public_api/api.sessions.create.response.v1.json`
+- `schemas/public_api/api.sessions.get.response.v1.json`
+- `schemas/public_api/api.sessions.events.list.response.v1.json`
+- `schemas/public_api/api.sessions.messages.append.request.v1.json`
+- `schemas/public_api/api.sessions.list.response.v1.json`
+
+### Endpoint Mapping
+
+- `POST /v1/sessions`
+  - request: `api.sessions.create.request.v1.json`
+  - response: `api.sessions.create.response.v1.json`
+- `GET /v1/sessions`
+  - unified visitor inbox, scoped strictly by participation
+  - response: `api.sessions.list.response.v1.json`
+- `GET /v1/sessions/{session_id}`
+  - response: `api.sessions.get.response.v1.json`
+- `GET /v1/sessions/{session_id}/events`
+  - response: `api.sessions.events.list.response.v1.json`
+- `GET /v1/sessions/{session_id}/stream`
+  - transport: `text/event-stream` (SSE)
+  - event payload shape: same event object as `api.sessions.events.list.response.v1.json` item
+- `POST /v1/sessions/{session_id}/messages`
+  - request: `api.sessions.messages.append.request.v1.json`
+  - response: `api.sessions.get.response.v1.json`
+
 ## Track F Phase 1 Families (Draft Contracts)
 
 ### Files

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.sessions.create.request.v1.json",
+  "title": "ApiSessionsCreateRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "to_agent",
+    "correlation_id"
+  ],
+  "properties": {
+    "to_agent": {
+      "description": "The owner's published agent address (or resolved internal agent address) the visitor is opening a conversation with.",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 383
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "from_agent": {
+      "description": "Deprecated — the visitor identity is derived from the authenticated visitor session. Accepted for backward compatibility but ignored by the server.",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 383
+    },
+    "parent_session_id": {
+      "description": "Optional parent session for multi-session coordination.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      }
+    }
+  }
+}

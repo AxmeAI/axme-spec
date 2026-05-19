@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/public_api/api.sessions.get.response.v1.json",
+  "title": "ApiSessionsGetResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok",
+    "session"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "session": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "session_id",
+        "correlation_id",
+        "status",
+        "owner_agent",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "correlation_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "WAITING_OWNER",
+            "RESOLVED",
+            "CLOSED",
+            "PRUNED"
+          ]
+        },
+        "owner_agent": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "visitor_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "parent_session_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_activity_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "message_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "intent_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}
