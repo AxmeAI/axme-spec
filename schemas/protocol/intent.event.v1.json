@@ -79,6 +79,11 @@
         "WAITING_FOR_TIME"
       ]
     },
+    "session_id": {
+      "description": "Optional. Set when the intent belongs to a Session orchestrator (see session.event.v1).",
+      "type": "string",
+      "format": "uuid"
+    },
     "payload": {
       "type": "object"
     },

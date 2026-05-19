@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/protocol/session.lifecycle.v1.json",
+  "title": "SessionLifecycleV1",
+  "description": "Lifecycle state of a Session. Unlike Intent (forward-only, terminal-final), a Session is bidirectional: a RESOLVED session may transition back to OPEN when the visitor returns.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_id",
+    "correlation_id",
+    "status",
+    "seq",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "OPEN",
+        "WAITING_OWNER",
+        "RESOLVED",
+        "CLOSED",
+        "PRUNED"
+      ]
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "owner_agent": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "visitor_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "parent_session_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_activity_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      }
+    }
+  }
+}

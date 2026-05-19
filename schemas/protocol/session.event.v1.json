@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axme.dev/schemas/protocol/session.event.v1.json",
+  "title": "SessionEventV1",
+  "description": "Append-only event in a Session event log. Monotonic seq per session. Sessions orchestrate Messages over DB+SSE and may spawn Intents; intent linkage is carried via intent_id on the relevant events.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_id",
+    "seq",
+    "event_type",
+    "at"
+  ],
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "session.created",
+        "session.message",
+        "session.owner_intervened",
+        "session.intent_spawned",
+        "session.intent_resolved",
+        "session.resolved",
+        "session.reopened",
+        "session.closed",
+        "session.pruned"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "OPEN",
+        "WAITING_OWNER",
+        "RESOLVED",
+        "CLOSED",
+        "PRUNED"
+      ]
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "intent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "message_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      }
+    }
+  }
+}

@@ -70,6 +70,16 @@
       "type": "string",
       "maxLength": 128
     },
+    "session_id": {
+      "description": "Optional. Set when this intent was spawned by a Session orchestrator (see session.lifecycle.v1). Absent for standalone agent-to-agent intents.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "parent_intent_id": {
+      "description": "Optional. Parent intent in a multi-intent hierarchy spawned within a Session.",
+      "type": "string",
+      "format": "uuid"
+    },
     "metadata": {
       "type": "object",
       "additionalProperties": {

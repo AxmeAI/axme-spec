@@ -508,3 +508,155 @@ class TestSchemaIntegrity:
         for schema_path in sorted(PUBLIC_API.rglob("*.json")):
             doc = json.loads(schema_path.read_text(encoding="utf-8"))
             assert "$id" in doc
+
+
+# ---------------------------------------------------------------------------
+# Group 12: Session protocol schemas (anti-messenger / D-030)
+# ---------------------------------------------------------------------------
+
+SESSION_STATUSES = {"OPEN", "WAITING_OWNER", "RESOLVED", "CLOSED", "PRUNED"}
+
+
+class TestSessionLifecycle:
+    schema = load(PROTOCOL / "session.lifecycle.v1.json")
+
+    def test_schema_has_correct_id(self):
+        assert self.schema["$id"] == "https://axme.dev/schemas/protocol/session.lifecycle.v1.json"
+
+    def test_status_enum_is_session_specific(self):
+        assert set(self.schema["properties"]["status"]["enum"]) == SESSION_STATUSES
+
+    def test_session_is_not_forward_only_like_intent(self):
+        # D-031: Intent is forward-only with final terminals. Session is
+        # bidirectional (RESOLVED -> OPEN on visitor return), so it must NOT
+        # reuse the Intent lifecycle enum.
+        statuses = set(self.schema["properties"]["status"]["enum"])
+        for intent_terminal in ("COMPLETED", "FAILED", "CANCELED", "TIMED_OUT"):
+            assert intent_terminal not in statuses
+
+    def test_required_fields_present(self):
+        required = self.schema["required"]
+        for field in ["session_id", "correlation_id", "status", "seq", "created_at", "updated_at"]:
+            assert field in required
+
+    def test_additional_properties_false(self):
+        assert self.schema["additionalProperties"] is False
+
+
+class TestSessionEvent:
+    schema = load(PROTOCOL / "session.event.v1.json")
+
+    def test_schema_has_correct_id(self):
+        assert self.schema["$id"] == "https://axme.dev/schemas/protocol/session.event.v1.json"
+
+    def test_event_types_present(self):
+        event_types = set(self.schema["properties"]["event_type"]["enum"])
+        for et in [
+            "session.created", "session.message", "session.owner_intervened",
+            "session.intent_spawned", "session.intent_resolved", "session.resolved",
+            "session.reopened", "session.closed", "session.pruned",
+        ]:
+            assert et in event_types, f"Missing session event_type: {et}"
+
+    def test_required_fields(self):
+        for field in ["session_id", "seq", "event_type", "at"]:
+            assert field in self.schema["required"]
+
+    def test_intent_linkage_field_present(self):
+        # session.intent_spawned / session.intent_resolved carry the spawned intent id
+        assert "intent_id" in self.schema["properties"]
+
+
+class TestSessionEnvelope:
+    schema = load(PROTOCOL / "session.envelope.v1.json")
+
+    def test_schema_has_correct_id(self):
+        assert self.schema["$id"] == "https://axme.dev/schemas/protocol/session.envelope.v1.json"
+
+    def test_version_const_v1(self):
+        assert self.schema["properties"]["version"]["const"] == "v1"
+
+    def test_required_fields(self):
+        for field in ["version", "session_id", "correlation_id", "created_at", "owner_agent"]:
+            assert field in self.schema["required"]
+
+
+# ---------------------------------------------------------------------------
+# Group 13: additive session_id linkage on existing intent/message schemas
+# (must stay v1 — optional, never required)
+# ---------------------------------------------------------------------------
+
+class TestIntentSessionLinkageAdditive:
+    lifecycle = load(PROTOCOL / "intent.lifecycle.v1.json")
+    event = load(PROTOCOL / "intent.event.v1.json")
+    envelope = load(PROTOCOL / "intent.envelope.v1.json")
+    message_v3 = load(PROTOCOL / "message.envelope.v3.json")
+
+    def test_lifecycle_session_id_optional(self):
+        assert "session_id" in self.lifecycle["properties"]
+        assert "parent_intent_id" in self.lifecycle["properties"]
+        assert "session_id" not in self.lifecycle["required"]
+        assert "parent_intent_id" not in self.lifecycle["required"]
+
+    def test_lifecycle_status_enum_unchanged(self):
+        # additive change must not touch the Intent status enum
+        assert set(self.lifecycle["properties"]["status"]["enum"]) == {
+            "CREATED", "SUBMITTED", "DELIVERED", "ACKNOWLEDGED", "IN_PROGRESS",
+            "WAITING", "COMPLETED", "FAILED", "CANCELED", "TIMED_OUT",
+        }
+
+    def test_event_session_id_optional(self):
+        assert "session_id" in self.event["properties"]
+        assert "session_id" not in self.event["required"]
+
+    def test_envelope_session_id_optional(self):
+        assert "session_id" in self.envelope["properties"]
+        assert "session_id" not in self.envelope["required"]
+
+    def test_message_v3_session_id_optional_nullable(self):
+        prop = self.message_v3["properties"]["session_id"]
+        assert prop["type"] == ["string", "null"]
+        assert "session_id" not in self.message_v3["required"]
+
+
+# ---------------------------------------------------------------------------
+# Group 14: Session public API schemas
+# ---------------------------------------------------------------------------
+
+class TestSessionPublicApi:
+    create_req = load(PUBLIC_API / "api.sessions.create.request.v1.json")
+    create_resp = load(PUBLIC_API / "api.sessions.create.response.v1.json")
+    get_resp = load(PUBLIC_API / "api.sessions.get.response.v1.json")
+    events_resp = load(PUBLIC_API / "api.sessions.events.list.response.v1.json")
+    append_req = load(PUBLIC_API / "api.sessions.messages.append.request.v1.json")
+    list_resp = load(PUBLIC_API / "api.sessions.list.response.v1.json")
+
+    def test_ids_correct(self):
+        base = "https://axme.dev/schemas/public_api/"
+        assert self.create_req["$id"] == base + "api.sessions.create.request.v1.json"
+        assert self.create_resp["$id"] == base + "api.sessions.create.response.v1.json"
+        assert self.get_resp["$id"] == base + "api.sessions.get.response.v1.json"
+        assert self.events_resp["$id"] == base + "api.sessions.events.list.response.v1.json"
+        assert self.append_req["$id"] == base + "api.sessions.messages.append.request.v1.json"
+        assert self.list_resp["$id"] == base + "api.sessions.list.response.v1.json"
+
+    def test_create_request_required(self):
+        assert set(self.create_req["required"]) == {"to_agent", "correlation_id"}
+
+    def test_create_response_status_session_enum(self):
+        assert set(self.create_resp["properties"]["status"]["enum"]) == SESSION_STATUSES
+        assert set(self.create_resp["required"]) == {"ok", "session_id", "status", "created_at"}
+
+    def test_get_response_shape(self):
+        assert set(self.get_resp["required"]) == {"ok", "session"}
+
+    def test_events_response_event_type_pattern(self):
+        item = self.events_resp["properties"]["events"]["items"]
+        assert item["properties"]["event_type"]["pattern"] == r"^session\.[a-z_]+$"
+        assert set(item["required"]) == {"session_id", "seq", "event_type", "at"}
+
+    def test_append_request_required_message(self):
+        assert self.append_req["required"] == ["message"]
+
+    def test_list_response_required(self):
+        assert set(self.list_resp["required"]) == {"ok", "sessions"}
